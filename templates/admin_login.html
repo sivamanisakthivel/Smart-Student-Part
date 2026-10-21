@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login - CampusJobs System{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="form-card border-top border-5 border-primary">
+                <div class="text-center mb-4">
+                    <div class="stat-icon mx-auto mb-3" style="background-color: rgba(10, 54, 99, 0.1); color: var(--primary-dark);">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h2 class="fw-bold text-dark mb-1">Administrator Portal</h2>
+                    <p class="text-muted small">Log in to manage job postings, student accounts & applications</p>
+                </div>
+
+                <form action="{{ url_for('admin_login') }}" method="POST" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="username" class="form-label font-semibold">Admin Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="fa-solid fa-user-gear text-muted"></i></span>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="admin" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label font-semibold">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="fa-solid fa-key text-muted"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-custom w-100 py-2 fs-6 mb-3" style="background: linear-gradient(135deg, var(--primary-dark), #0d47a1);">
+                        <i class="fa-solid fa-shield-halved me-2"></i> Admin Login
+                    </button>
+                </form>
+
+                <div class="alert alert-light border small text-center mb-0 mt-3 text-muted">
+                    <i class="fa-solid fa-circle-info text-primary me-1"></i> Default Demo Credentials:<br>
+                    Username: <strong>admin</strong> | Password: <strong>admin123</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

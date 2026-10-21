@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localhost / 127.0.0.1 / student_job_db | phpMyAdmin</title>
+    <link rel="icon" href="https://www.phpmyadmin.net/static/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+            color: #222;
+        }
+
+        /* Header Navigation */
+        #pma_header {
+            background: linear-gradient(to bottom, #ffffff, #e6e6e6);
+            border-bottom: 1px solid #d0d0d0;
+            padding: 4px 10px 0 10px;
+        }
+        .logo-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+        .pma-logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e37400;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .pma-logo span {
+            color: #0055a5;
+        }
+        .server-breadcrumbs {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            color: #444;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        .server-breadcrumbs a {
+            color: #0022b3;
+            text-decoration: none;
+        }
+
+        /* Tabs Navigation */
+        .nav-tabs {
+            display: flex;
+            gap: 2px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-tabs li {
+            background: #e1e1e1;
+            border: 1px solid #b8b8b8;
+            border-bottom: none;
+            border-radius: 3px 3px 0 0;
+            padding: 5px 12px;
+            cursor: pointer;
+            color: #333;
+            font-weight: bold;
+        }
+        .nav-tabs li.active {
+            background: #ffffff;
+            border-bottom: 1px solid #ffffff;
+            color: #000;
+        }
+        .nav-tabs li:hover {
+            background: #f0f0f0;
+        }
+
+        /* Layout Container */
+        #container {
+            display: flex;
+            height: calc(100vh - 75px);
+        }
+
+        /* Left Sidebar Tree */
+        #sidebar {
+            width: 240px;
+            background: #fbfbfb;
+            border-right: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        .tree-header {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            color: #444;
+        }
+        .tree-list {
+            list-style: none;
+            padding-left: 12px;
+            margin: 0;
+        }
+        .tree-list li {
+            padding: 3px 0;
+            cursor: pointer;
+            color: #0033cc;
+        }
+        .tree-list li:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content Panel */
+        #content {
+            flex-grow: 1;
+            padding: 15px;
+            background: #ffffff;
+            overflow-y: auto;
+        }
+
+        /* Filter bar */
+        .filter-box {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 3px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .filter-box input {
+            padding: 3px 6px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            width: 200px;
+        }
+
+        /* Data Tables */
+        table.pma-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #d3d3d3;
+            margin-bottom: 15px;
+        }
+        table.pma-table th {
+            background: linear-gradient(to bottom, #f7f7f7, #e7e7e7);
+            border: 1px solid #d3d3d3;
+            padding: 6px 8px;
+            text-align: left;
+            color: #333;
+            font-weight: bold;
+        }
+        table.pma-table td {
+            border: 1px solid #e2e2e2;
+            padding: 5px 8px;
+            color: #222;
+        }
+        table.pma-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        table.pma-table tr:hover {
+            background-color: #eaf2ff;
+        }
+
+        .action-link {
+            color: #0000cc;
+            text-decoration: none;
+            margin-right: 6px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .action-link:hover {
+            text-decoration: underline;
+        }
+
+        .sum-row {
+            background: #e8e8e8 !important;
+            font-weight: bold;
+        }
+
+        /* SQL Editor Tab */
+        .sql-editor {
+            width: 100%;
+            height: 120px;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 13px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+        .btn-pma {
+            background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+            border: 1px solid #ababab;
+            padding: 4px 14px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-pma:hover {
+            background: #eee;
+        }
+
+        /* Status Pills & Notices */
+        .notice-box {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 8px 12px;
+            border-radius: 3px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- phpMyAdmin Header -->
+    <div id="pma_header">
+        <div class="logo-bar">
+            <div class="pma-logo">
+                php<span>MyAdmin</span>
+            </div>
+            <div style="font-size: 11px; color: #555;">
+                Logged in as: <strong>root@localhost</strong> | Smart Student Job Portal DB
+            </div>
+        </div>
+
+        <!-- Breadcrumbs -->
+        <div class="server-breadcrumbs">
+            📁 🖥️ <strong>Server: 127.0.0.1</strong> » 🗄️ <strong>Database: student_job_db</strong>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav-tabs">
+            <li id="tab-structure" class="active" onclick="showTab('structure')">🏗️ Structure</li>
+            <li id="tab-sql" onclick="showTab('sql')">💻 SQL Query</li>
+            <li id="tab-browse" onclick="showTab('browse')">📄 Browse Data</li>
+            <li id="tab-export" onclick="showTab('export')">📤 Export</li>
+            <li id="tab-import" onclick="showTab('import')">📥 Import</li>
+            <li id="tab-operations" onclick="showTab('operations')">⚙️ Operations</li>
+        </ul>
+    </div>
+
+    <!-- Layout -->
+    <div id="container">
+        <!-- Sidebar Tree -->
+        <div id="sidebar">
+            <div class="tree-header">🗄️ <strong>Databases</strong></div>
+            <ul class="tree-list" style="padding-left: 5px;">
+                <li>▼ <strong>student_job_db (7)</strong></li>
+                <ul class="tree-list" id="sidebar-tables">
+
+                    <li onclick="browseTable('admins')">⊞ 📄 admins</li>
+
+                    <li onclick="browseTable('students')">⊞ 📄 students</li>
+
+                    <li onclick="browseTable('categories')">⊞ 📄 categories</li>
+
+                    <li onclick="browseTable('jobs')">⊞ 📄 jobs</li>
+
+                    <li onclick="browseTable('otps')">⊞ 📄 otps</li>
+
+                    <li onclick="browseTable('applications')">⊞ 📄 applications</li>
+
+                    <li onclick="browseTable('saved_jobs')">⊞ 📄 saved_jobs</li>
+
+                </ul>
+                <li style="color: #666;">▶ electronics_shop</li>
+                <li style="color: #666;">▶ information_schema</li>
+                <li style="color: #666;">▶ mysql</li>
+                <li style="color: #666;">▶ performance_schema</li>
+                <li style="color: #666;">▶ test</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- TAB 1: STRUCTURE VIEW (Matches User Screenshot) -->
+            <div id="view-structure">
+                <div class="filter-box">
+                    <label><strong>Filters:</strong> Containing the word:</label>
+                    <input type="text" id="table-filter" placeholder="Search tables..." onkeyup="filterTables()">
+                </div>
+
+                <table class="pma-table" id="structure-table">
+                    <thead>
+                        <tr>
+                            <th width="30"><input type="checkbox" id="check-all"></th>
+                            <th>Table ⬆</th>
+                            <th>Action</th>
+                            <th>Rows 🛈</th>
+                            <th>Type</th>
+                            <th>Collation</th>
+                            <th>Size</th>
+                            <th>Overhead</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="table-row-item">
+                            <td><input type="checkbox"></td>
+                            <td><a href="javascript:void(0)" onclick="browseTable('admins')" style="color: #0022b3; font-weight: bold; text-decoration: none;">admins</a></td>
+                            <td>
+                                <span class="action-link" onclick="browseTable('admins')">📋 Browse</span>
+                                <span class="action-link" onclick="showStructure('admins')">🏗️ Structure</span>
+                                <span class="action-link" onclick="searchTable('admins')">🔍 Search</span>
+                                <span class="action-link" onclick="insertRow('admins')">➕ Insert</span>
+                                <span class="action-link" style="color: #cc0000;">🗑️ Empty</span>
+                                <span class="action-link" style="color: #cc0000;">❌ Drop</span>
+                            </td>
+                            <td style="text-align: right; color: #008800; font-weight: bold;">1</td>
+                            <td>InnoDB</td>
+                            <td>utf8mb4_general_ci</td>
+                            <td style="text-align: right;">21.2 KiB</td>
+                            <td style="text-align: center;">-</td>
+                        </tr>
+
+                        <tr class="table-row-item">
+                            <td><input type="checkbox"></td>
+                            <td><a href="javascript:void(0)" onclick="browseTable('students')" style="color: #0022b3; font-weight: bold; text-decoration: none;">students</a></td>
+                            <td>
+                                <span class="action-link" onclick="browseTable('students')">📋 Browse</span>
+                                <span class="action-link" onclick="showStructure('students')">🏗️ Structure</span>
+                                <span class="action-link" onclick="searchTable('students')">🔍 Search</span>
+                                <span class="action-link" onclick="insertRow('students')">➕ Insert</span>
+                                <span class="action-link" style="color: #cc0000;">🗑️ Empty</span>
+                                <span class="action-link" style="color: #cc0000;">❌ Drop</span>
+                            </td>
+                            <td style="text-align: right; color: #008800; font-weight: bold;">2</td>
+                            <td>InnoDB</td>
+                            <td>utf8mb4_general_ci</td>
+                            <td style="text-align: right;">24.0 KiB</td>
+                            <td style="text-align: center;">-</td>
+                        </tr>
+
+                        <tr class="table-row-item">
+                            <td><input type="checkbox"></td>
+                            <td><a href="javascript:void(0)" onclick="browseTable('categories')" style="color: #0022b3; font-weight: bold; text-decoration: none;">categories</a></td>
+                            <td>
+                                <span class="action-link" onclick="browseTable('categories')">📋 Browse</span>
+                                <span class="action-link" onclick="showStructure('categories')">🏗️ Structure</span>
+                                <span class="action-link" onclick="searchTable('categories')">🔍 Search</span>
+                                <span class="action-link" onclick="insertRow('categories')">➕ Insert</span>
+                                <span class="action-link" style="color: #cc0000;">🗑️ Empty</span>
+                                <span class="action-link" style="color: #cc0000;">❌ Drop</span>
+                            </td>
+                            <td style="text-align: right; color: #008800; font-weight: bold;">4</td>
+                            <td>InnoDB</td>
+                            <td>utf8mb4_general_ci</td>
+                            <td style="text-align: right;">20.8 KiB</td>
+                            <td style="text-align: center;">-</td>
+                        </tr>
+
+                        <tr class="table-row-item">
+                            <td><input type="checkbox"></td>
+                            <td><a href="javascript:void(0)" onclick="browseTable('jobs')" style="color: #0022b3; font-weight: bold; text-decoration: none;">jobs</a></td>
+                            <td>
+                                <span class="action-link" onclick="browseTable('jobs')">📋 Browse</span>
+                                <span class="action-link" onclick="showStructure('jobs')">🏗️ Structure</span>
+                                <span class="action-link" onclick="searchTable('jobs')">🔍 Search</span>
+                                <span class="action-link" onclick="insertRow('jobs')">➕ Insert</span>
+                                <span class="action-link" style="color: #cc0000;">🗑️ Empty</span>
+                                <span class="action-link" style="color: #cc0000;">❌ Drop</span>
+                            </td>
+                            <td style="text-align: right; color: #008800; font-weight: bold;">5</td>
+                            <td>InnoDB</td>
+                            <td>utf8mb4_general_ci</td>
+                            <td style="text-align: right;">27.6 KiB</td>
+                            <td style="text-align: center;">-</td>
+                        </tr>
+
+                        <tr class="table-row-item">
+                            <td><input type="checkbox"></td>
+                            <td><a href="javascript:void(0)" onclick="browseTable('otps')" style="color: #0022b3; font-weight: bold; text-decoration: none;">otps</a></td>
+                            <td>
+                                <span class="action-link" onclick="browseTable('otps')">📋 Browse</span>
+                                <span class="action-link" onclick="showStructure('otps')">🏗️ Structure</span>
+                                <span class="action-link" onclick="searchTable('otps')">🔍 Search</span>
+                                <span class="action-link" onclick="insertRow('otps')">➕ Insert</span>
+                                <span class="action-link" style="color: #cc0000;">🗑️ Empty</span>
+                                <span class="action-link" style="color: #cc0000;">❌ Drop</span>
+                            </td>
+                            <td style="text-align: right; color: #008800; font-weight: bold;">0</td>
+                            <td>InnoDB</td>
+                            <td>utf8mb4_general_ci</td>
+                            <td style="text-align: right;">21.6 KiB</td>
+                            <td style="text-align: center;">-</td>
+                        </tr>
+
+                        <tr class="table-row-item">
+                            <td><input type="checkbox"></td>
+                            <td><a href="javascript:void(0)" onclick="browseTable('applications')" style="color: #0022b3; font-weight: bold; text-decoration: none;">applications</a></td>
+                            <td>
+                                <span class="action-link" onclick="browseTable('applications')">📋 Browse</span>
+                                <span class="action-link" onclick="showStructure('applications')">🏗️ Structure</span>
+                                <span class="action-link" onclick="searchTable('applications')">🔍 Search</span>
+                                <span class="action-link" onclick="insertRow('applications')">➕ Insert</span>
+                                <span class="action-link" style="color: #cc0000;">🗑️ Empty</span>
+                                <span class="action-link" style="color: #cc0000;">❌ Drop</span>
+                            </td>
+                            <td style="text-align: right; color: #008800; font-weight: bold;">2</td>
+                            <td>InnoDB</td>
+                            <td>utf8mb4_general_ci</td>
+                            <td style="text-align: right;">21.6 KiB</td>
+                            <td style="text-align: center;">-</td>
+                        </tr>
+
+                        <tr class="table-row-item">
+                            <td><input type="checkbox"></td>
+                            <td><a href="javascript:void(0)" onclick="browseTable('saved_jobs')" style="color: #0022b3; font-weight: bold; text-decoration: none;">saved_jobs</a></td>
+                            <td>
+                                <span class="action-link" onclick="browseTable('saved_jobs')">📋 Browse</span>
+                                <span class="action-link" onclick="showStructure('saved_jobs')">🏗️ Structure</span>
+                                <span class="action-link" onclick="searchTable('saved_jobs')">🔍 Search</span>
+                                <span class="action-link" onclick="insertRow('saved_jobs')">➕ Insert</span>
+                                <span class="action-link" style="color: #cc0000;">🗑️ Empty</span>
+                                <span class="action-link" style="color: #cc0000;">❌ Drop</span>
+                            </td>
+                            <td style="text-align: right; color: #008800; font-weight: bold;">0</td>
+                            <td>InnoDB</td>
+                            <td>utf8mb4_general_ci</td>
+                            <td style="text-align: right;">19.2 KiB</td>
+                            <td style="text-align: center;">-</td>
+                        </tr>
+
+                        <tr class="sum-row">
+                            <td></td>
+                            <td><strong>7 tables</strong></td>
+                            <td><strong>Sum</strong></td>
+                            <td style="text-align: right;"><strong>14</strong></td>
+                            <td><strong>InnoDB</strong></td>
+                            <td><strong>utf8mb4_general_ci</strong></td>
+                            <td style="text-align: right;"><strong>48.0 KiB</strong></td>
+                            <td style="text-align: center;"><strong>0 B</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TAB 2: SQL QUERY RUNNER -->
+            <div id="view-sql" style="display: none;">
+                <h3>Run SQL query/queries on database <code>student_job_db</code>:</h3>
+                <textarea class="sql-editor" id="sql-input">SELECT * FROM jobs;</textarea>
+                <br>
+                <button class="btn-pma" onclick="executeSql()">Go ▶</button>
+
+                <div id="sql-results" style="margin-top: 20px;"></div>
+            </div>
+
+            <!-- TAB 3: BROWSE DATA -->
+            <div id="view-browse" style="display: none;">
+                <h3 id="browse-title">Showing records for table</h3>
+                <div id="browse-container">Select a table from the sidebar or Structure view to browse data.</div>
+            </div>
+
+            <!-- TAB 4: EXPORT -->
+            <div id="view-export" style="display: none;">
+                <h3>Exporting tables from "student_job_db" database</h3>
+                <div style="background: #f8f8f8; border: 1px solid #ccc; padding: 15px; border-radius: 3px;">
+                    <p>Format: <strong>SQL Dump (.sql) / JSON (.json)</strong></p>
+                    <button class="btn-pma" onclick="downloadExport('sql')">📥 Export SQL Dump</button>
+                    <button class="btn-pma" style="margin-left: 10px;" onclick="downloadExport('json')">📥 Export JSON Data</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const DB_DATA = {"admins": [{"id": 1, "username": "admin", "email": "admin@jobportal.com", "password": "scrypt:32768:8:1$O26bGFGKuYul7Dz9$856a8d6b9dab4baef6cb00dd92ee1a4c29dbcab3d84e0af7d5b08e6f67fd23336f714ea5aea73a265271bb9de47e0364ac5949ae6589743dc526ea4cd325bdd6", "full_name": "System Administrator", "created_at": "2026-08-17 16:20:59.684066"}], "students": [{"id": 1, "full_name": "vishnu", "email": "marvel638275@gmail.com", "password": "scrypt:32768:8:1$6kA0jjrfbjHVBlyx$0ee733ea8781571e03b8fc69edddbdd2d96c51dc95878c6d34d4917b5a4645b461ee256ea2d1cfa66d74ea9c5879c34fe7a4109c54cbba3b4ad611ba17db98b4", "phone": "6382759315", "college": "sri vasavi college", "department": "physics", "skills": "react", "created_at": "2026-09-10 15:20:24.605310"}, {"id": 2, "full_name": "dinesh", "email": "dineshchinnathambi2007@gmail.com", "password": "scrypt:32768:8:1$0Gu6cARXwMO9fkKG$6f038b08549d1053617446f8d213953a73d5e8ab2ebbc69a32973b14f9a7666328368584ed81cda4c1b475443d88ab4031211a9d15e75a70aec265c34dd5bc1a", "phone": "6382103939", "college": "periyar", "department": "bsc cs", "skills": "sales man", "created_at": "2026-10-01 10:00:40.134410"}], "categories": [{"id": 1, "name": "Bakery", "icon": "FaCookieBite", "created_at": "2026-08-17 16:20:59.233499"}, {"id": 2, "name": "Medical", "icon": "FaClinicMedical", "created_at": "2026-08-17 16:20:59.233513"}, {"id": 4, "name": "Hotel & Restaurant", "icon": "FaUtensils", "created_at": "2026-08-17 16:20:59.233517"}, {"id": 5, "name": "Tea & Cafe", "icon": "FaCoffee", "created_at": "2026-08-17 16:20:59.233519"}], "jobs": [{"id": 1, "title": "bakery", "company_name": "quality bakery", "location": "edappadi ph:6382759315", "job_type": "Weekend", "salary": "4000", "category": "Bakery", "image_url": "https://s.tmimgcdn.com/scr/400x250/76700/yamiz-bakery-multipurpose-animated-wordpress-elementor-theme_76771-0-original.jpg", "description": "customer", "requirements": "bill counter", "status": "Active", "created_at": "2026-09-10 15:16:00.632734"}, {"id": 2, "title": "master", "company_name": "nandha bakery", "location": "Edappadi ph:6369842555", "job_type": "Part-Time", "salary": "5000", "category": "Bakery", "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1790844224/student_jobs/x03n8xwnbx6xrzh74ho5.png", "description": "customer", "requirements": "accounts", "status": "Active", "created_at": "2026-09-30 14:12:14.436383"}, {"id": 3, "title": "accounts", "company_name": "kumbakonam degree coffee", "location": "edappadi  ph:", "job_type": "Weekend", "salary": "2500", "category": "Bakery", "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1790845146/student_jobs/u3y4b5j2dorzlvqxx7jf.jpg", "description": "sales assistent", "requirements": "sales man", "status": "Active", "created_at": "2026-10-01 08:58:46.556217"}, {"id": 4, "title": "fruit sales", "company_name": "karungali palamuthir solai", "location": "Edappadi  ph:", "job_type": "Part-Time", "salary": "400", "category": "Supermarket", "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1790846420/student_jobs/tjjdaloyemmcmhivzu6f.jpg", "description": "market", "requirements": "fruit sales man", "status": "Active", "created_at": "2026-10-01 09:21:36.050504"}, {"id": 5, "title": "flower", "company_name": "saravana flower shop", "location": "Edappadi ph: 96593 54806", "job_type": "Weekend", "salary": "3000", "category": "Supermarket", "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1790846637/student_jobs/ydk2kj6wtnucivydaocp.jpg", "description": "flower", "requirements": "flower sales", "status": "Active", "created_at": "2026-10-01 09:25:11.544249"}], "otps": [], "applications": [{"id": 1, "job_id": 2, "student_id": 1, "applied_date": "2026-10-01 09:57:01.606730", "status": "Accepted", "cover_note": ""}, {"id": 2, "job_id": 5, "student_id": 2, "applied_date": "2026-10-01 10:00:57.277034", "status": "Accepted", "cover_note": "sales man"}], "saved_jobs": []};
+        const DB_SCHEMAS = {"admins": [{"cid": 0, "name": "id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 1}, {"cid": 1, "name": "username", "type": "VARCHAR(50)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 2, "name": "email", "type": "VARCHAR(100)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 3, "name": "password", "type": "VARCHAR(255)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 4, "name": "full_name", "type": "VARCHAR(100)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 5, "name": "created_at", "type": "DATETIME", "notnull": 0, "dflt_value": null, "pk": 0}], "students": [{"cid": 0, "name": "id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 1}, {"cid": 1, "name": "full_name", "type": "VARCHAR(100)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 2, "name": "email", "type": "VARCHAR(100)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 3, "name": "password", "type": "VARCHAR(255)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 4, "name": "phone", "type": "VARCHAR(20)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 5, "name": "college", "type": "VARCHAR(150)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 6, "name": "department", "type": "VARCHAR(100)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 7, "name": "skills", "type": "TEXT", "notnull": 0, "dflt_value": null, "pk": 0}, {"cid": 8, "name": "created_at", "type": "DATETIME", "notnull": 0, "dflt_value": null, "pk": 0}], "categories": [{"cid": 0, "name": "id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 1}, {"cid": 1, "name": "name", "type": "VARCHAR(100)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 2, "name": "icon", "type": "VARCHAR(50)", "notnull": 0, "dflt_value": null, "pk": 0}, {"cid": 3, "name": "created_at", "type": "DATETIME", "notnull": 0, "dflt_value": null, "pk": 0}], "jobs": [{"cid": 0, "name": "id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 1}, {"cid": 1, "name": "title", "type": "VARCHAR(150)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 2, "name": "company_name", "type": "VARCHAR(100)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 3, "name": "location", "type": "VARCHAR(100)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 4, "name": "job_type", "type": "VARCHAR(50)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 5, "name": "salary", "type": "VARCHAR(50)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 6, "name": "category", "type": "VARCHAR(50)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 7, "name": "image_url", "type": "VARCHAR(500)", "notnull": 0, "dflt_value": null, "pk": 0}, {"cid": 8, "name": "description", "type": "TEXT", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 9, "name": "requirements", "type": "TEXT", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 10, "name": "status", "type": "VARCHAR(20)", "notnull": 0, "dflt_value": null, "pk": 0}, {"cid": 11, "name": "created_at", "type": "DATETIME", "notnull": 0, "dflt_value": null, "pk": 0}], "otps": [{"cid": 0, "name": "id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 1}, {"cid": 1, "name": "email", "type": "VARCHAR(255)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 2, "name": "otp_code", "type": "VARCHAR(6)", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 3, "name": "purpose", "type": "VARCHAR(50)", "notnull": 0, "dflt_value": null, "pk": 0}, {"cid": 4, "name": "attempts", "type": "INTEGER", "notnull": 0, "dflt_value": null, "pk": 0}, {"cid": 5, "name": "expires_at", "type": "DATETIME", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 6, "name": "created_at", "type": "DATETIME", "notnull": 0, "dflt_value": null, "pk": 0}], "applications": [{"cid": 0, "name": "id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 1}, {"cid": 1, "name": "job_id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 2, "name": "student_id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 3, "name": "applied_date", "type": "DATETIME", "notnull": 0, "dflt_value": null, "pk": 0}, {"cid": 4, "name": "status", "type": "VARCHAR(50)", "notnull": 0, "dflt_value": null, "pk": 0}, {"cid": 5, "name": "cover_note", "type": "TEXT", "notnull": 0, "dflt_value": null, "pk": 0}], "saved_jobs": [{"cid": 0, "name": "id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 1}, {"cid": 1, "name": "student_id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 2, "name": "job_id", "type": "INTEGER", "notnull": 1, "dflt_value": null, "pk": 0}, {"cid": 3, "name": "saved_at", "type": "DATETIME", "notnull": 0, "dflt_value": null, "pk": 0}]};
+        const TABLES_INFO = [{"name": "admins", "rows": 1, "cols_count": 6, "type": "InnoDB", "collation": "utf8mb4_general_ci", "size": "21.2 KiB"}, {"name": "students", "rows": 2, "cols_count": 9, "type": "InnoDB", "collation": "utf8mb4_general_ci", "size": "24.0 KiB"}, {"name": "categories", "rows": 4, "cols_count": 4, "type": "InnoDB", "collation": "utf8mb4_general_ci", "size": "20.8 KiB"}, {"name": "jobs", "rows": 5, "cols_count": 12, "type": "InnoDB", "collation": "utf8mb4_general_ci", "size": "27.6 KiB"}, {"name": "otps", "rows": 0, "cols_count": 7, "type": "InnoDB", "collation": "utf8mb4_general_ci", "size": "21.6 KiB"}, {"name": "applications", "rows": 2, "cols_count": 6, "type": "InnoDB", "collation": "utf8mb4_general_ci", "size": "21.6 KiB"}, {"name": "saved_jobs", "rows": 0, "cols_count": 4, "type": "InnoDB", "collation": "utf8mb4_general_ci", "size": "19.2 KiB"}];
+
+        function showTab(tabName) {
+            const tabs = ['structure', 'sql', 'browse', 'export', 'import', 'operations'];
+            tabs.forEach(t => {
+                const tabEl = document.getElementById('tab-' + t);
+                const viewEl = document.getElementById('view-' + t);
+                if (tabEl) tabEl.classList.remove('active');
+                if (viewEl) viewEl.style.display = 'none';
+            });
+
+            const activeTab = document.getElementById('tab-' + tabName);
+            const activeView = document.getElementById('view-' + tabName);
+            if (activeTab) activeTab.classList.add('active');
+            if (activeView) activeView.style.display = 'block';
+        }
+
+        function browseTable(tableName) {
+            showTab('browse');
+            document.getElementById('browse-title').innerHTML = 'Showing records for table: <code style="color:#0022b3; font-size:14px;">' + tableName + '</code>';
+            
+            const rows = DB_DATA[tableName] || [];
+            const container = document.getElementById('browse-container');
+
+            if (rows.length === 0) {
+                container.innerHTML = '<div class="notice-box">MySQL returned an empty result set (i.e. zero rows) for <code>SELECT * FROM ' + tableName + '</code></div>';
+                return;
+            }
+
+            const cols = Object.keys(rows[0]);
+            let html = '<div class="notice-box">Showing rows 0 - ' + (rows.length - 1) + ' (' + rows.length + ' total, Query took 0.0002 seconds)</div>';
+            html += '<table class="pma-table"><thead><tr>';
+            cols.forEach(c => html += '<th>' + c + '</th>');
+            html += '</tr></thead><tbody>';
+
+            rows.forEach(r => {
+                html += '<tr>';
+                cols.forEach(c => {
+                    const val = r[c] !== null ? r[c] : '<i style="color:#888;">NULL</i>';
+                    html += '<td>' + val + '</td>';
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+
+            container.innerHTML = html;
+        }
+
+        function showStructure(tableName) {
+            showTab('browse');
+            document.getElementById('browse-title').innerHTML = 'Column Structure for table: <code>' + tableName + '</code>';
+            const schema = DB_SCHEMAS[tableName] || [];
+            const container = document.getElementById('browse-container');
+
+            let html = '<table class="pma-table"><thead><tr><th>#</th><th>Name</th><th>Type</th><th>Null</th><th>Default</th><th>Primary Key</th></tr></thead><tbody>';
+            schema.forEach(col => {
+                html += '<tr><td>' + col.cid + '</td><td><strong>' + col.name + '</strong></td><td>' + col.type + '</td><td>' + (col.notnull ? 'NO' : 'YES') + '</td><td>' + (col.dflt_value || 'NULL') + '</td><td>' + (col.pk ? '🔑 PRIMARY KEY' : '') + '</td></tr>';
+            });
+            html += '</tbody></table>';
+
+            container.innerHTML = html;
+        }
+
+        function executeSql() {
+            const query = document.getElementById('sql-input').value.trim();
+            const resultsDiv = document.getElementById('sql-results');
+
+            if (query.toLowerCase().includes('from jobs')) {
+                browseTable('jobs');
+            } else if (query.toLowerCase().includes('from students')) {
+                browseTable('students');
+            } else if (query.toLowerCase().includes('from admins')) {
+                browseTable('admins');
+            } else if (query.toLowerCase().includes('from categories')) {
+                browseTable('categories');
+            } else {
+                resultsDiv.innerHTML = '<div class="notice-box">Executed: <code>' + query + '</code> (OK)</div>';
+            }
+        }
+
+        function filterTables() {
+            const filter = document.getElementById('table-filter').value.toLowerCase();
+            const rows = document.querySelectorAll('.table-row-item');
+            rows.forEach(r => {
+                const text = r.textContent.toLowerCase();
+                r.style.display = text.includes(filter) ? '' : 'none';
+            });
+        }
+
+        function downloadExport(type) {
+            window.location.href = type === 'json' ? 'student_job_data.json' : 'database_report.html';
+        }
+    </script>
+</body>
+</html>

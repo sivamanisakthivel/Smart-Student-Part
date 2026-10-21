@@ -1,0 +1,313 @@
+/* ==========================================================================
+   Smart Student Part-Time Job Management System - Custom Stylesheet
+   Theme: Modern Blue & White Palette
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-blue: #0d6efd;
+    --primary-dark: #0a3663;
+    --accent-blue: #00b4d8;
+    --light-bg: #f4f7fa;
+    --white: #ffffff;
+    --text-dark: #2b2d42;
+    --text-muted: #6c757d;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 2px 8px rgba(13, 110, 253, 0.08);
+    --shadow-md: 0 4px 16px rgba(13, 110, 253, 0.12);
+    --shadow-lg: 0 10px 30px rgba(10, 54, 99, 0.15);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* Navbar Customization */
+.navbar-custom {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+    box-shadow: var(--shadow-md);
+    padding: 0.85rem 1rem;
+}
+
+.navbar-custom .navbar-brand {
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--white) !important;
+    letter-spacing: -0.5px;
+}
+
+.navbar-custom .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+    color: var(--white) !important;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.navbar-custom .btn-nav-accent {
+    background-color: var(--white);
+    color: var(--primary-blue) !important;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.45rem 1.2rem;
+    transition: var(--transition);
+}
+
+.navbar-custom .btn-nav-accent:hover {
+    background-color: var(--light-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Hero Section */
+.hero-banner {
+    background: linear-gradient(135deg, rgba(10, 54, 99, 0.95), rgba(13, 110, 253, 0.88)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    color: var(--white);
+    padding: 5rem 1.5rem;
+    border-radius: 0 0 24px 24px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.hero-title {
+    font-weight: 700;
+    font-size: 2.75rem;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-weight: 300;
+    font-size: 1.2rem;
+    max-width: 680px;
+    margin: 0 auto 2rem auto;
+    opacity: 0.95;
+}
+
+/* Cards & Content Containers */
+.custom-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    height: 100%;
+}
+
+.custom-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(13, 110, 253, 0.3);
+}
+
+.card-title-blue {
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+/* Form Styles */
+.form-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+.form-control, .form-select {
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+    border: none;
+    color: var(--white);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.btn-primary-custom:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+    box-shadow: 0 6px 16px rgba(13, 110, 253, 0.3);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+.btn-outline-custom {
+    border: 2px solid var(--primary-blue);
+    color: var(--primary-blue);
+    font-weight: 600;
+    padding: 0.65rem 1.4rem;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.btn-outline-custom:hover {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+/* Badges & Status */
+.badge-status {
+    padding: 0.45em 0.85em;
+    font-weight: 600;
+    border-radius: 30px;
+    font-size: 0.82rem;
+}
+
+.badge-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.badge-shortlisted {
+    background-color: #cff4fc;
+    color: #055160;
+}
+
+.badge-accepted {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.badge-rejected {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.badge-job-type {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: var(--primary-blue);
+    border: 1px solid rgba(13, 110, 253, 0.2);
+}
+
+/* Dashboard Summary Widgets */
+.stat-widget {
+    background-color: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border-left: 5px solid var(--primary-blue);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-icon {
+    width: 54px;
+    height: 54px;
+    background-color: rgba(13, 110, 253, 0.1);
+    color: var(--primary-blue);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}
+
+/* Tables */
+.custom-table-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.custom-table {
+    margin-bottom: 0;
+}
+
+.custom-table th {
+    background-color: #eef4fc;
+    color: var(--primary-dark);
+    font-weight: 600;
+    border-bottom: 2px solid var(--border-color);
+    padding: 1rem;
+}
+
+.custom-table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+/* Footer */
+.footer-custom {
+    background: var(--primary-dark);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    border-top: 4px solid var(--primary-blue);
+}
+
+.footer-custom a {
+    color: var(--accent-blue);
+    text-decoration: none;
+}
+
+.footer-custom a:hover {
+    text-decoration: underline;
+}
+
+/* OTP Verification Styles */
+.otp-container {
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.otp-box {
+    width: 52px;
+    height: 60px;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.otp-box:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    background-color: #f8faff;
+}
+

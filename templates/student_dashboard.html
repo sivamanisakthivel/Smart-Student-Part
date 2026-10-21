@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard - CampusJobs{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Welcome Header -->
+    <div class="row align-items-center mb-4">
+        <div class="col-md-8">
+            <h2 class="fw-bold text-dark mb-1">Welcome back, {{ student.full_name }}! 👋</h2>
+            <p class="text-muted mb-0"><i class="fa-solid fa-graduation-cap me-1"></i> {{ student.college }} | {{ student.department }}</p>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+            <a href="{{ url_for('job_list') }}" class="btn btn-primary-custom"><i class="fa-solid fa-magnifying-glass me-1"></i> Explore New Jobs</a>
+        </div>
+    </div>
+
+    <!-- Overview Counters -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="stat-widget">
+                <div>
+                    <div class="stat-number">{{ total_applications }}</div>
+                    <div class="stat-label">Total Applications</div>
+                </div>
+                <div class="stat-icon">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-widget" style="border-left-color: #0dcaf0;">
+                <div>
+                    <div class="stat-number text-info">{{ pending_count }}</div>
+                    <div class="stat-label">Pending Review</div>
+                </div>
+                <div class="stat-icon text-info" style="background-color: rgba(13, 202, 240, 0.1);">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-widget" style="border-left-color: #198754;">
+                <div>
+                    <div class="stat-number text-success">{{ accepted_count }}</div>
+                    <div class="stat-label">Shortlisted / Accepted</div>
+                </div>
+                <div class="stat-icon text-success" style="background-color: rgba(25, 135, 84, 0.1);">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Applications Table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="custom-table-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-clock-rotate-left me-2 text-primary"></i> Recent Job Applications</h5>
+                    <a href="{{ url_for('my_applications') }}" class="btn btn-sm btn-outline-custom">View All</a>
+                </div>
+
+                {% if recent_applications %}
+                    <div class="table-responsive">
+                        <table class="table custom-table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Company / Dept</th>
+                                    <th>Job Type</th>
+                                    <th>Applied On</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for app in recent_applications %}
+                                    <tr>
+                                        <td>
+                                            <strong class="text-dark">{{ app.title }}</strong>
+                                        </td>
+                                        <td>{{ app.company_name }}</td>
+                                        <td><span class="badge badge-job-type">{{ app.job_type }}</span></td>
+                                        <td class="text-muted small">{{ app.applied_date|format_datetime('%b %d, %Y') if app.applied_date else 'N/A' }}</td>
+                                        <td>
+                                            {% if app.status == 'Pending' %}
+                                                <span class="badge badge-status badge-pending"><i class="fa-solid fa-hourglass-start me-1"></i> Pending</span>
+                                            {% elif app.status == 'Shortlisted' %}
+                                                <span class="badge badge-status badge-shortlisted"><i class="fa-solid fa-star me-1"></i> Shortlisted</span>
+                                            {% elif app.status == 'Accepted' %}
+                                                <span class="badge badge-status badge-accepted"><i class="fa-solid fa-check-circle me-1"></i> Accepted</span>
+                                            {% else %}
+                                                <span class="badge badge-status badge-rejected"><i class="fa-solid fa-times-circle me-1"></i> Rejected</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{{ url_for('job_detail', job_id=app.job_id) }}" class="btn btn-sm btn-light border text-primary">
+                                                <i class="fa-solid fa-eye"></i> View Job
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fa-solid fa-folder-open fs-2 text-muted mb-2"></i>
+                        <p class="text-muted">You haven't submitted any job applications yet.</p>
+                        <a href="{{ url_for('job_list') }}" class="btn btn-sm btn-primary-custom px-3">Browse Available Jobs</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

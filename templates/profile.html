@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - CampusJobs{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="form-card">
+                <div class="text-center mb-4">
+                    <div class="stat-icon mx-auto mb-3">
+                        <i class="fa-solid fa-user-pen"></i>
+                    </div>
+                    <h2 class="fw-bold text-dark mb-1">Edit Student Profile</h2>
+                    <p class="text-muted small">Update your personal details, academic information, and key skills</p>
+                </div>
+
+                <form action="{{ url_for('student_profile') }}" method="POST" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="full_name" class="form-label font-semibold">Full Name</label>
+                        <input type="text" class="form-control" id="full_name" name="full_name" value="{{ student.full_name }}" required>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label font-semibold">Email Address (Read Only)</label>
+                            <input type="email" class="form-control bg-light" id="email" value="{{ student.email }}" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label font-semibold">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" value="{{ student.phone }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="college" class="form-label font-semibold">College / Institution</label>
+                            <input type="text" class="form-control" id="college" name="college" value="{{ student.college }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="department" class="form-label font-semibold">Department / Major</label>
+                            <input type="text" class="form-control" id="department" name="department" value="{{ student.department }}" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="skills" class="form-label font-semibold">Key Skills</label>
+                        <textarea class="form-control" id="skills" name="skills" rows="3" required>{{ student.skills }}</textarea>
+                        <div class="form-text">List your key technical, analytical, or interpersonal skills.</div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{ url_for('student_dashboard') }}" class="btn btn-outline-secondary px-4">Cancel</a>
+                        <button type="submit" class="btn btn-primary-custom px-4">
+                            <i class="fa-solid fa-floppy-disk me-1"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

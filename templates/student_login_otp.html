@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Passwordless Login - Request OTP{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center my-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card card-custom shadow-lg border-0">
+            <div class="card-body p-4 p-md-5 text-center">
+                <div class="mb-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                        <i class="fas fa-envelope fa-2x"></i>
+                    </div>
+                    <h3 class="fw-bold text-primary">Login via OTP</h3>
+                    <p class="text-muted small">Enter your registered email and we'll send you a one-time code to sign in.</p>
+                </div>
+
+                <form action="{{ url_for('student_login_otp') }}" method="POST">
+                    <div class="mb-3 text-start">
+                        <label class="form-label small fw-bold">Email address</label>
+                        <input type="email" name="email" class="form-control form-control-lg" required autofocus>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100 py-3 fw-bold rounded-pill mb-3 shadow-sm">
+                        Send OTP
+                    </button>
+                </form>
+
+                <div class="text-center small">
+                    <a href="{{ url_for('student_login') }}">Back to password login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Email OTP Verification - Smart Student Part-Time Job Management System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center my-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card card-custom shadow-lg border-0">
+            <div class="card-body p-4 p-md-5 text-center">
+                <div class="mb-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                        <i class="fas fa-shield-alt fa-2x"></i>
+                    </div>
+                    <h3 class="fw-bold text-primary">Email OTP Verification</h3>
+                    <p class="text-muted small">We sent a 6-digit verification code to<br><strong class="text-dark">{{ email }}</strong></p>
+                </div>
+
+                {% if not is_sent and demo_otp %}
+                <!-- Simulated Dev OTP Banner -->
+                <div class="alert alert-warning border-warning d-flex align-items-center text-start p-3 mb-4 rounded-3 shadow-sm">
+                    <i class="fas fa-flask text-warning fa-2x me-3"></i>
+                    <div>
+                        <div class="fw-bold text-dark mb-1">Development Mode Active</div>
+                        <div class="small text-secondary">Your simulated 6-digit OTP code is: <span class="badge bg-dark fs-6 text-warning font-monospace px-2 py-1">{{ demo_otp }}</span></div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <form action="{{ url_for('verify_otp') }}" method="POST" id="otpForm">
+                    <label class="form-label fw-bold text-secondary mb-3">Enter 6-Digit Code</label>
+
+                    <div class="d-flex justify-content-between gap-2 mb-4 otp-container">
+                        <input type="text" maxlength="1" class="form-control form-control-lg text-center fw-bold fs-3 otp-box" name="digit1" id="digit1" autofocus required autocomplete="off">
+                        <input type="text" maxlength="1" class="form-control form-control-lg text-center fw-bold fs-3 otp-box" name="digit2" id="digit2" required autocomplete="off">
+                        <input type="text" maxlength="1" class="form-control form-control-lg text-center fw-bold fs-3 otp-box" name="digit3" id="digit3" required autocomplete="off">
+                        <input type="text" maxlength="1" class="form-control form-control-lg text-center fw-bold fs-3 otp-box" name="digit4" id="digit4" required autocomplete="off">
+                        <input type="text" maxlength="1" class="form-control form-control-lg text-center fw-bold fs-3 otp-box" name="digit5" id="digit5" required autocomplete="off">
+                        <input type="text" maxlength="1" class="form-control form-control-lg text-center fw-bold fs-3 otp-box" name="digit6" id="digit6" required autocomplete="off">
+                    </div>
+
+                    <input type="hidden" name="otp" id="combinedOtp">
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100 py-3 fw-bold rounded-pill mb-3 shadow-sm">
+                        <i class="fas fa-check-circle me-2"></i>
+                        {% if purpose == 'login' %}
+                            Verify & Login
+                        {% elif purpose == 'password_reset' %}
+                            Verify & Reset Password
+                        {% else %}
+                            Verify & Complete Registration
+                        {% endif %}
+                    </button>
+                </form>
+
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                    <span class="text-muted small">
+                        <i class="far fa-clock me-1"></i> Code expires in: <strong id="otpTimer" class="text-danger">05:00</strong>
+                    </span>
+                    <form action="{{ url_for('resend_otp') }}" method="POST" class="d-inline">
+                        <button type="submit" id="resendBtn" class="btn btn-link btn-sm text-decoration-none fw-bold p-0">
+                            <i class="fas fa-redo me-1"></i> Resend OTP
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

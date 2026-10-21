@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - CampusJobs System{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Admin Header -->
+    <div class="row align-items-center mb-4">
+        <div class="col-md-8">
+            <h2 class="fw-bold text-dark mb-1"><i class="fa-solid fa-gauge-high text-primary me-2"></i> Admin Control Panel</h2>
+            <p class="text-muted mb-0">System Overview & Quick Management Tools</p>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+            <a href="{{ url_for('manage_jobs') }}#addJobModal" class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#addJobModal">
+                <i class="fa-solid fa-plus me-1"></i> Post New Job
+            </a>
+        </div>
+    </div>
+
+    <!-- Summary Widgets -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="stat-widget" style="border-left-color: #0d6efd;">
+                <div>
+                    <div class="stat-number">{{ total_jobs }}</div>
+                    <div class="stat-label">Active Job Postings</div>
+                </div>
+                <div class="stat-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-widget" style="border-left-color: #20c997;">
+                <div>
+                    <div class="stat-number text-success">{{ total_students }}</div>
+                    <div class="stat-label">Registered Students</div>
+                </div>
+                <div class="stat-icon text-success" style="background-color: rgba(32, 201, 151, 0.1);">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-widget" style="border-left-color: #ffc107;">
+                <div>
+                    <div class="stat-number text-warning">{{ total_applications }}</div>
+                    <div class="stat-label">Total Applications</div>
+                </div>
+                <div class="stat-icon text-warning" style="background-color: rgba(255, 193, 7, 0.1);">
+                    <i class="fa-solid fa-file-signature"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Action Navigation Cards -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="custom-card p-4 text-center">
+                <div class="stat-icon mx-auto mb-3">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Manage Jobs</h5>
+                <p class="text-muted small mb-3">Add new part-time positions, update job details, or remove expired listings.</p>
+                <a href="{{ url_for('manage_jobs') }}" class="btn btn-outline-custom w-100">Go to Manage Jobs</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="custom-card p-4 text-center">
+                <div class="stat-icon mx-auto mb-3" style="background-color: rgba(32, 201, 151, 0.1); color: #20c997;">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">View Registered Students</h5>
+                <p class="text-muted small mb-3">Browse all student profiles, view contact info, department, and skills.</p>
+                <a href="{{ url_for('manage_students') }}" class="btn btn-outline-custom w-100">View Student Directory</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="custom-card p-4 text-center">
+                <div class="stat-icon mx-auto mb-3" style="background-color: rgba(255, 193, 7, 0.1); color: #ffc107;">
+                    <i class="fa-solid fa-file-invoice"></i>
+                </div>
+                <h5 class="fw-bold text-dark mb-2">Review Applications</h5>
+                <p class="text-muted small mb-3">Review incoming job applications and mark statuses (Shortlisted, Accepted, Rejected).</p>
+                <a href="{{ url_for('admin_applications') }}" class="btn btn-outline-custom w-100">View Applications</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Applications Overview -->
+    <div class="row">
+        <div class="col-12">
+            <div class="custom-table-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold text-dark mb-0"><i class="fa-solid fa-paper-plane text-primary me-2"></i> Recent Applications Submitted</h5>
+                    <a href="{{ url_for('admin_applications') }}" class="btn btn-sm btn-outline-custom">View All Applications</a>
+                </div>
+
+                {% if recent_applications %}
+                    <div class="table-responsive">
+                        <table class="table custom-table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Job Title</th>
+                                    <th>Applied Date</th>
+                                    <th>Current Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for app in recent_applications %}
+                                    <tr>
+                                        <td>
+                                            <strong class="text-dark">{{ app.full_name }}</strong><br>
+                                            <span class="text-muted fs-7">{{ app.email }}</span>
+                                        </td>
+                                        <td>{{ app.title }}</td>
+                                        <td class="text-muted small">{{ app.applied_date|format_datetime('%b %d, %Y') if app.applied_date else 'N/A' }}</td>
+                                        <td>
+                                            {% if app.status == 'Pending' %}
+                                                <span class="badge badge-status badge-pending">Pending</span>
+                                            {% elif app.status == 'Shortlisted' %}
+                                                <span class="badge badge-status badge-shortlisted">Shortlisted</span>
+                                            {% elif app.status == 'Accepted' %}
+                                                <span class="badge badge-status badge-accepted">Accepted</span>
+                                            {% else %}
+                                                <span class="badge badge-status badge-rejected">Rejected</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{{ url_for('admin_applications') }}" class="btn btn-sm btn-light border text-primary">Manage</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted text-center py-3 mb-0">No job applications submitted yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

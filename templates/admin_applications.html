@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Job Applications - Admin Portal{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-dark mb-1">Student Job Applications</h2>
+            <p class="text-muted mb-0">Review student submissions and update application status</p>
+        </div>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-custom">
+            <i class="fa-solid fa-arrow-left me-1"></i> Dashboard
+        </a>
+    </div>
+
+    <!-- Search Input -->
+    <div class="mb-3">
+        <div class="input-group">
+            <span class="input-group-text bg-white"><i class="fa-solid fa-search text-muted"></i></span>
+            <input type="text" id="tableSearch" class="form-control" placeholder="Search applications by student name, job title, or status...">
+        </div>
+    </div>
+
+    <div class="custom-table-card p-4">
+        {% if applications %}
+            <div class="table-responsive">
+                <table class="table custom-table table-hover align-middle searchable-table">
+                    <thead>
+                        <tr>
+                            <th>App ID</th>
+                            <th>Student Details</th>
+                            <th>Job Title</th>
+                            <th>Applied Date</th>
+                            <th>Cover Note</th>
+                            <th>Current Status</th>
+                            <th>Update Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for app in applications %}
+                            <tr>
+                                <td>#{{ app.id }}</td>
+                                <td>
+                                    <strong class="text-dark">{{ app.full_name }}</strong><br>
+                                    <span class="text-muted fs-7"><i class="fa-regular fa-envelope me-1"></i> {{ app.email }}</span><br>
+                                    <span class="text-muted fs-7"><i class="fa-solid fa-graduation-cap me-1"></i> {{ app.department }}</span>
+                                </td>
+                                <td>
+                                    <strong>{{ app.title }}</strong><br>
+                                    <span class="text-muted fs-7">{{ app.company_name }}</span>
+                                </td>
+                                <td class="text-muted small">
+                                    {{ app.applied_date|format_datetime('%b %d, %Y') if app.applied_date else 'N/A' }}
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-light border" data-bs-toggle="modal" data-bs-target="#noteModal{{ app.id }}">
+                                        <i class="fa-solid fa-file-lines me-1"></i> View Note
+                                    </button>
+                                </td>
+                                <td>
+                                    {% if app.status == 'Pending' %}
+                                        <span class="badge badge-status badge-pending">Pending</span>
+                                    {% elif app.status == 'Shortlisted' %}
+                                        <span class="badge badge-status badge-shortlisted">Shortlisted</span>
+                                    {% elif app.status == 'Accepted' %}
+                                        <span class="badge badge-status badge-accepted">Accepted</span>
+                                    {% else %}
+                                        <span class="badge badge-status badge-rejected">Rejected</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <form action="{{ url_for('update_application_status') }}" method="POST" class="d-flex gap-1">
+                                        <input type="hidden" name="application_id" value="{{ app.id }}">
+                                        <select name="status" class="form-select form-select-sm" style="width: 130px;">
+                                            <option value="Pending" {% if app.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                            <option value="Shortlisted" {% if app.status == 'Shortlisted' %}selected{% endif %}>Shortlisted</option>
+                                            <option value="Accepted" {% if app.status == 'Accepted' %}selected{% endif %}>Accepted</option>
+                                            <option value="Rejected" {% if app.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-sm btn-primary-custom px-2" title="Save Status">
+                                            <i class="fa-solid fa-check"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                            <!-- Cover Note Modal -->
+                            <div class="modal fade" id="noteModal{{ app.id }}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content border-0 shadow-lg rounded-4">
+                                        <div class="modal-header bg-primary text-white rounded-top-4">
+                                            <h5 class="modal-title fw-bold"><i class="fa-solid fa-quote-left me-2"></i> Application Note - {{ app.full_name }}</h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body p-4">
+                                            <p class="text-secondary mb-3"><strong>Job Applied:</strong> {{ app.title }} ({{ app.company_name }})</p>
+                                            <p class="text-secondary mb-3"><strong>Student Skills:</strong> {{ app.skills }}</p>
+                                            <hr>
+                                            <h6 class="fw-bold text-dark mb-2">Cover Note / Message:</h6>
+                                            <div class="bg-light p-3 rounded-3 text-dark border">
+                                                {{ app.cover_note or 'No cover note submitted.' }}
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer bg-light rounded-bottom-4">
+                                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fa-solid fa-folder-open fs-2 text-muted mb-2"></i>
+                <p class="text-muted mb-0">No applications to display.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

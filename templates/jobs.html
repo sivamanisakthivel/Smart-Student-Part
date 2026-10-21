@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}View & Search Part-Time Jobs - CampusJobs{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="mb-4">
+        <h2 class="fw-bold text-dark mb-1">Available Part-Time & Campus Jobs</h2>
+        <p class="text-muted">Find positions that match your skills, schedule, and department.</p>
+    </div>
+
+    <!-- Filter & Search Bar -->
+    <div class="custom-card p-4 mb-4">
+        <div class="row g-3">
+            <div class="col-md-5">
+                <label for="jobSearchInput" class="form-label font-semibold small text-muted">Keyword Search</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="fa-solid fa-search text-muted"></i></span>
+                    <input type="text" id="jobSearchInput" class="form-control" placeholder="Search by job title or company...">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label for="categorySelect" class="form-label font-semibold small text-muted">Category</label>
+                <select id="categorySelect" class="form-select">
+                    <option value="">All Categories</option>
+                    <option value="IT & Software" {% if query_cat == 'IT & Software' %}selected{% endif %}>IT & Software</option>
+                    <option value="Administration" {% if query_cat == 'Administration' %}selected{% endif %}>Administration</option>
+                    <option value="Education" {% if query_cat == 'Education' %}selected{% endif %}>Education</option>
+                    <option value="Marketing" {% if query_cat == 'Marketing' %}selected{% endif %}>Marketing</option>
+                    <option value="Tutoring" {% if query_cat == 'Tutoring' %}selected{% endif %}>Tutoring</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="jobTypeSelect" class="form-label font-semibold small text-muted">Job Type</label>
+                <select id="jobTypeSelect" class="form-select">
+                    <option value="">All Job Types</option>
+                    <option value="Part-Time">Part-Time</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Weekend">Weekend</option>
+                    <option value="Remote">Remote</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jobs Grid -->
+    <div class="row g-4" id="jobGrid">
+        {% if jobs %}
+            {% for job in jobs %}
+                <div class="col-md-6 col-lg-4 job-card-item"
+                     data-title="{{ job.title.lower() }}"
+                     data-company="{{ job.company_name.lower() }}"
+                     data-category="{{ job.category.lower() }}"
+                     data-type="{{ job.job_type.lower() }}">
+                    <div class="custom-card p-4 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge badge-job-type">{{ job.job_type }}</span>
+                                <span class="fw-bold text-success fs-6">{{ job.salary }}</span>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-1">{{ job.title }}</h5>
+                            <p class="text-primary small fw-semibold mb-2">
+                                <i class="fa-solid fa-building me-1"></i> {{ job.company_name }}
+                            </p>
+
+                            <p class="text-muted small mb-2">
+                                <i class="fa-solid fa-location-dot me-1"></i> {{ job.location }}
+                            </p>
+                            <p class="text-muted small mb-3">
+                                <i class="fa-solid fa-tag me-1"></i> {{ job.category }}
+                            </p>
+
+                            <p class="card-text text-secondary small line-clamp-2 mb-3">
+                                {{ job.description[:110] }}...
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+                            <span class="text-muted fs-7">
+                                <i class="fa-regular fa-calendar-alt me-1"></i>
+                                {{ job.created_at|format_datetime('%b %d, %Y') if job.created_at else 'Active' }}
+                            </span>
+                            <a href="#" class="btn btn-sm btn-primary-custom px-3">
+                                View Details <i class="fa-solid fa-chevron-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center py-5">
+                <i class="fa-solid fa-magnifying-glass fs-1 text-muted mb-3 d-block"></i>
+                <h5 class="fw-bold text-muted">No jobs matching your search criteria</h5>
+                <p class="text-muted small">Try adjusting your category or keyword filters.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}{{ job.title }} - CampusJobs{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <div class="mb-3">
+                <a href="{{ url_for('job_list') }}" class="text-decoration-none text-muted">
+                    <i class="fa-solid fa-arrow-left me-1"></i> Back to All Jobs
+                </a>
+            </div>
+
+            <!-- Job Detail Card -->
+            <div class="custom-card p-4 p-md-5 mb-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3 border-bottom pb-4">
+                    <div>
+                        <span class="badge badge-job-type mb-2">{{ job.job_type }}</span>
+                        <h2 class="fw-bold text-dark mb-1">{{ job.title }}</h2>
+                        <h5 class="text-primary fw-semibold mb-0"><i class="fa-solid fa-building me-1"></i> {{ job.company_name }}</h5>
+                    </div>
+                    <div class="text-md-end">
+                        <div class="fs-4 fw-bold text-success mb-1">{{ job.salary }}</div>
+                        <div class="text-muted small"><i class="fa-solid fa-location-dot me-1"></i> {{ job.location }}</div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-6 col-md-3">
+                        <div class="bg-light p-3 rounded-3 text-center">
+                            <span class="text-muted small d-block">Category</span>
+                            <strong class="text-dark">{{ job.category }}</strong>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="bg-light p-3 rounded-3 text-center">
+                            <span class="text-muted small d-block">Job Type</span>
+                            <strong class="text-dark">{{ job.job_type }}</strong>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="bg-light p-3 rounded-3 text-center">
+                            <span class="text-muted small d-block">Status</span>
+                            <strong class="text-success">{{ job.status }}</strong>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="bg-light p-3 rounded-3 text-center">
+                            <span class="text-muted small d-block">Posted On</span>
+                            <strong class="text-dark">{{ job.created_at|format_datetime('%b %d, %Y') if job.created_at else 'Recent' }}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Description -->
+                <div class="mb-4">
+                    <h5 class="fw-bold text-dark mb-2"><i class="fa-solid fa-file-alt me-2 text-primary"></i> Job Description</h5>
+                    <p class="text-secondary leading-relaxed" style="white-space: pre-line;">{{ job.description }}</p>
+                </div>
+
+                <!-- Requirements -->
+                <div class="mb-5">
+                    <h5 class="fw-bold text-dark mb-2"><i class="fa-solid fa-list-check me-2 text-primary"></i> Key Requirements</h5>
+                    <p class="text-secondary leading-relaxed" style="white-space: pre-line;">{{ job.requirements }}</p>
+                </div>
+
+                <!-- Application Action Box -->
+                <div class="border-top pt-4 text-center">
+                    {% if session.get('user_type') == 'student' %}
+                        {% if has_applied %}
+                            <div class="alert alert-success d-inline-block px-4 py-2 rounded-pill shadow-sm">
+                                <i class="fa-solid fa-circle-check me-2"></i> You have already applied for this job on <strong>{{ application_info.applied_date|format_datetime('%b %d, %Y') if application_info else '' }}</strong> (Status: <strong>{{ application_info.status if application_info else 'Pending' }}</strong>)
+                            </div>
+                        {% else %}
+                            <button type="button" class="btn btn-primary-custom btn-lg px-5 shadow" data-bs-toggle="modal" data-bs-target="#applyModal">
+                                <i class="fa-solid fa-paper-plane me-2"></i> Apply For This Job Now
+                            </button>
+                        {% endif %}
+                    {% elif session.get('user_type') == 'admin' %}
+                        <div class="alert alert-info d-inline-block px-4 py-2 rounded-3">
+                            <i class="fa-solid fa-user-shield me-2"></i> Logged in as Admin. Manage job postings from <a href="{{ url_for('manage_jobs') }}" class="alert-link">Admin Dashboard</a>.
+                        </div>
+                    {% else %}
+                        <div class="bg-light p-4 rounded-4">
+                            <h5 class="fw-bold text-dark mb-2">Interested in applying?</h5>
+                            <p class="text-muted small mb-3">You must be logged in with a Student Account to submit applications.</p>
+                            <a href="{{ url_for('student_login') }}" class="btn btn-primary-custom px-4 me-2">Log In to Apply</a>
+                            <a href="{{ url_for('student_register') }}" class="btn btn-outline-custom px-4">Create Account</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Apply Modal -->
+{% if session.get('user_type') == 'student' and not has_applied %}
+<div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-primary text-white rounded-top-4">
+                <h5 class="modal-title fw-bold" id="applyModalLabel"><i class="fa-solid fa-paper-plane me-2"></i> Apply for {{ job.title }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ url_for('apply_job', job_id=job.id) }}" method="POST" class="needs-validation" novalidate>
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label font-semibold">Applicant Name</label>
+                        <input type="text" class="form-control" value="{{ session.get('user_name') }}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cover_note" class="form-label font-semibold">Cover Note / Why are you a good fit?</label>
+                        <textarea class="form-control" id="cover_note" name="cover_note" rows="4" placeholder="Briefly state your availability, experience, or interest in this part-time job..." required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light rounded-bottom-4">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary-custom px-4">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

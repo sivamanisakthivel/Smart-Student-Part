@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Database Report - Smart Student Job Portal</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+            --subtext: #94a3b8;
+            --border: #334155;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 30px;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: var(--accent);
+            margin: 0 0 8px 0;
+            font-size: 1.8rem;
+        }
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .meta-card {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .meta-label {
+            color: var(--subtext);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 4px;
+            word-break: break-all;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--warning);
+            margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .table-box {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: #0f172a;
+            color: var(--subtext);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+        }
+        tr:hover {
+            background: #283548;
+        }
+        .print-btn {
+            background: #0284c7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            float: right;
+        }
+        .print-btn:hover {
+            background: #0369a1;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+
+    <div class="header">
+        <h1>📊 SQL Database Storage Report</h1>
+        <p style="color: var(--subtext); margin: 0;">Smart Student Part-Time Job Management System Database Summary</p>
+
+        <div class="meta-grid">
+            <div class="meta-card">
+                <div class="meta-label">📁 Database Location</div>
+                <div class="meta-value">D:\student_job_system\student_job.db</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">💾 Engine Type</div>
+                <div class="meta-value">SQLite3 (local db file)</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">📦 File Size</div>
+                <div class="meta-value">48.0 KB (49152 Bytes)</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">🕒 Last Modified</div>
+                <div class="meta-value">2026-10-06 20:57:49</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>📋 Database Tables Summary</span>
+        <span class="badge">7 Tables Active</span>
+    </div>
+
+    <div class="table-box">
+        <table>
+            <thead>
+                <tr>
+                    <th>Table Name</th>
+                    <th>Total Records</th>
+                    <th>Columns Count</th>
+                    <th>Primary Key</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><strong style="color: var(--accent);">admins</strong></td>
+                    <td><span style="color: var(--success); font-weight: bold;">1</span> records</td>
+                    <td>6 columns</td>
+                    <td><code>id</code></td>
+                </tr>
+
+                <tr>
+                    <td><strong style="color: var(--accent);">students</strong></td>
+                    <td><span style="color: var(--success); font-weight: bold;">2</span> records</td>
+                    <td>9 columns</td>
+                    <td><code>id</code></td>
+                </tr>
+
+                <tr>
+                    <td><strong style="color: var(--accent);">categories</strong></td>
+                    <td><span style="color: var(--success); font-weight: bold;">4</span> records</td>
+                    <td>4 columns</td>
+                    <td><code>id</code></td>
+                </tr>
+
+                <tr>
+                    <td><strong style="color: var(--accent);">jobs</strong></td>
+                    <td><span style="color: var(--success); font-weight: bold;">5</span> records</td>
+                    <td>12 columns</td>
+                    <td><code>id</code></td>
+                </tr>
+
+                <tr>
+                    <td><strong style="color: var(--accent);">otps</strong></td>
+                    <td><span style="color: var(--success); font-weight: bold;">0</span> records</td>
+                    <td>7 columns</td>
+                    <td><code>id</code></td>
+                </tr>
+
+                <tr>
+                    <td><strong style="color: var(--accent);">applications</strong></td>
+                    <td><span style="color: var(--success); font-weight: bold;">2</span> records</td>
+                    <td>6 columns</td>
+                    <td><code>id</code></td>
+                </tr>
+
+                <tr>
+                    <td><strong style="color: var(--accent);">saved_jobs</strong></td>
+                    <td><span style="color: var(--success); font-weight: bold;">0</span> records</td>
+                    <td>4 columns</td>
+                    <td><code>id</code></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-box">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: var(--accent);">Table: <code>admins</code></h3>
+            <span class="badge">1 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>username</th><th>email</th><th>password</th><th>full_name</th><th>created_at</th></tr></thead><tbody><tr><td>1</td><td>admin</td><td>admin@jobportal.com</td><td>scrypt:32768:8:1$O26bGFGKuYul7Dz9$856a8d6b9dab4baef6cb00d...</td><td>System Administrator</td><td>2026-08-17 16:20:59.684066</td></tr></tbody></table></div>
+    <div class="table-box">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: var(--accent);">Table: <code>students</code></h3>
+            <span class="badge">2 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>full_name</th><th>email</th><th>password</th><th>phone</th><th>college</th><th>department</th><th>skills</th><th>created_at</th></tr></thead><tbody><tr><td>1</td><td>vishnu</td><td>marvel638275@gmail.com</td><td>scrypt:32768:8:1$6kA0jjrfbjHVBlyx$0ee733ea8781571e03b8fc6...</td><td>6382759315</td><td>sri vasavi college</td><td>physics</td><td>react</td><td>2026-09-10 15:20:24.605310</td></tr><tr><td>2</td><td>dinesh</td><td>dineshchinnathambi2007@gmail.com</td><td>scrypt:32768:8:1$0Gu6cARXwMO9fkKG$6f038b08549d1053617446f...</td><td>6382103939</td><td>periyar</td><td>bsc cs</td><td>sales man</td><td>2026-10-01 10:00:40.134410</td></tr></tbody></table></div>
+    <div class="table-box">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: var(--accent);">Table: <code>categories</code></h3>
+            <span class="badge">4 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>name</th><th>icon</th><th>created_at</th></tr></thead><tbody><tr><td>1</td><td>Bakery</td><td>FaCookieBite</td><td>2026-08-17 16:20:59.233499</td></tr><tr><td>2</td><td>Medical</td><td>FaClinicMedical</td><td>2026-08-17 16:20:59.233513</td></tr><tr><td>4</td><td>Hotel & Restaurant</td><td>FaUtensils</td><td>2026-08-17 16:20:59.233517</td></tr><tr><td>5</td><td>Tea & Cafe</td><td>FaCoffee</td><td>2026-08-17 16:20:59.233519</td></tr></tbody></table></div>
+    <div class="table-box">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: var(--accent);">Table: <code>jobs</code></h3>
+            <span class="badge">5 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>title</th><th>company_name</th><th>location</th><th>job_type</th><th>salary</th><th>category</th><th>image_url</th><th>description</th><th>requirements</th><th>status</th><th>created_at</th></tr></thead><tbody><tr><td>1</td><td>bakery</td><td>quality bakery</td><td>edappadi ph:6382759315</td><td>Weekend</td><td>4000</td><td>Bakery</td><td>https://s.tmimgcdn.com/scr/400x250/76700/yamiz-bakery-mul...</td><td>customer</td><td>bill counter</td><td>Active</td><td>2026-09-10 15:16:00.632734</td></tr><tr><td>2</td><td>master</td><td>nandha bakery</td><td>Edappadi ph:6369842555</td><td>Part-Time</td><td>5000</td><td>Bakery</td><td>https://res.cloudinary.com/wdjxsbeh/image/upload/v1790844...</td><td>customer</td><td>accounts</td><td>Active</td><td>2026-09-30 14:12:14.436383</td></tr><tr><td>3</td><td>accounts</td><td>kumbakonam degree coffee</td><td>edappadi  ph:</td><td>Weekend</td><td>2500</td><td>Bakery</td><td>https://res.cloudinary.com/wdjxsbeh/image/upload/v1790845...</td><td>sales assistent</td><td>sales man</td><td>Active</td><td>2026-10-01 08:58:46.556217</td></tr><tr><td>4</td><td>fruit sales</td><td>karungali palamuthir solai</td><td>Edappadi  ph:</td><td>Part-Time</td><td>400</td><td>Supermarket</td><td>https://res.cloudinary.com/wdjxsbeh/image/upload/v1790846...</td><td>market</td><td>fruit sales man</td><td>Active</td><td>2026-10-01 09:21:36.050504</td></tr><tr><td>5</td><td>flower</td><td>saravana flower shop</td><td>Edappadi ph: 96593 54806</td><td>Weekend</td><td>3000</td><td>Supermarket</td><td>https://res.cloudinary.com/wdjxsbeh/image/upload/v1790846...</td><td>flower</td><td>flower sales</td><td>Active</td><td>2026-10-01 09:25:11.544249</td></tr></tbody></table></div>
+    <div class="table-box">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: var(--accent);">Table: <code>otps</code></h3>
+            <span class="badge">0 Records</span>
+        </div>
+<p style="color: var(--subtext); font-style: italic; margin-top: 15px;">No records currently present in this table.</p></div>
+    <div class="table-box">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: var(--accent);">Table: <code>applications</code></h3>
+            <span class="badge">2 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>job_id</th><th>student_id</th><th>applied_date</th><th>status</th><th>cover_note</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>1</td><td>2026-10-01 09:57:01.606730</td><td>Accepted</td><td></td></tr><tr><td>2</td><td>5</td><td>2</td><td>2026-10-01 10:00:57.277034</td><td>Accepted</td><td>sales man</td></tr></tbody></table></div>
+    <div class="table-box">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: var(--accent);">Table: <code>saved_jobs</code></h3>
+            <span class="badge">0 Records</span>
+        </div>
+<p style="color: var(--subtext); font-style: italic; margin-top: 15px;">No records currently present in this table.</p></div>
+</body>
+</html>

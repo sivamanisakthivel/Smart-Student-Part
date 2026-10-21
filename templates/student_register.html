@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Student Registration - CampusJobs{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="form-card">
+                <div class="text-center mb-4">
+                    <div class="stat-icon mx-auto mb-3">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <h2 class="fw-bold text-dark mb-1">Create Student Account</h2>
+                    <p class="text-muted small">Join now to explore and apply for campus part-time jobs</p>
+                </div>
+
+                <form action="{{ url_for('student_register') }}" method="POST" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="full_name" class="form-label font-semibold">Full Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="fa-solid fa-user text-muted"></i></span>
+                            <input type="text" class="form-control" id="full_name" name="full_name" placeholder="John Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label font-semibold">College Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fa-solid fa-envelope text-muted"></i></span>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="student@college.edu" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label font-semibold">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fa-solid fa-phone text-muted"></i></span>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="9876543210" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="college" class="form-label font-semibold">College / University</label>
+                            <input type="text" class="form-control" id="college" name="college" placeholder="State University" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="department" class="form-label font-semibold">Department / Major</label>
+                            <input type="text" class="form-control" id="department" name="department" placeholder="Computer Science" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="skills" class="form-label font-semibold">Key Skills</label>
+                        <input type="text" class="form-control" id="skills" name="skills" placeholder="e.g. Python, Communication, Graphic Design, HTML/CSS" required>
+                        <div class="form-text">Comma-separated list of your core technical or soft skills.</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label font-semibold">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" minlength="6" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-custom w-100 py-2 fs-6 mb-3">
+                        <i class="fa-solid fa-user-check me-2"></i> Register Account
+                    </button>
+                </form>
+
+                <div class="text-center small text-muted mt-3">
+                    <p class="mb-1">After submitting, a 6-digit OTP will be sent to your email to verify your account.</p>
+                    <p class="mb-0">Already have an account? <a href="{{ url_for('student_login') }}" class="text-primary font-semibold text-decoration-none">Login Here</a></p>
+                    <p class="mb-0">Already received a code? <a href="{{ url_for('verify_otp') }}" class="text-primary">Verify OTP</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

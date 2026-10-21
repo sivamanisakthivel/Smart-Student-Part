@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Viewer - student_job.db</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 30px;
+        }
+        h1 {
+            color: #38bdf8;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .table-section {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .table-title {
+            font-size: 1.3rem;
+            color: #fbbf24;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .badge {
+            background: #0284c7;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        th {
+            background-color: #0f172a;
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover {
+            background-color: #334155;
+        }
+        .empty-msg {
+            color: #64748b;
+            font-style: italic;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🗄️ Database Viewer (`student_job.db`)</h1>
+    <p style="color: #94a3b8;">Real-time visual table inspector for your SQLite database records.</p>
+
+    <div class="table-section">
+        <div class="table-title">
+            <span>📋 Table: <strong>admins</strong></span>
+            <span class="badge">1 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>username</th><th>email</th><th>password</th><th>full_name</th><th>created_at</th></tr></thead><tbody><tr><td>1</td><td>admin</td><td>admin@jobportal.com</td><td>scrypt:32768:8:1$O26bGFGKuYul7Dz9$856a8d6b9dab4baef6cb00dd92ee1a4c29dbcab3d84e0af7d5b08e6f67fd23336f714ea5aea73a265271bb9de47e0364ac5949ae6589743dc526ea4cd325bdd6</td><td>System Administrator</td><td>2026-08-17 16:20:59.684066</td></tr>tbody></table></div>
+    <div class="table-section">
+        <div class="table-title">
+            <span>📋 Table: <strong>students</strong></span>
+            <span class="badge">1 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>full_name</th><th>email</th><th>password</th><th>phone</th><th>college</th><th>department</th><th>skills</th><th>created_at</th></tr></thead><tbody><tr><td>1</td><td>vishnu</td><td>marvel638275@gmail.com</td><td>scrypt:32768:8:1$6kA0jjrfbjHVBlyx$0ee733ea8781571e03b8fc69edddbdd2d96c51dc95878c6d34d4917b5a4645b461ee256ea2d1cfa66d74ea9c5879c34fe7a4109c54cbba3b4ad611ba17db98b4</td><td>6382759315</td><td>sri vasavi college</td><td>physics</td><td>react</td><td>2026-09-10 15:20:24.605310</td></tr>tbody></table></div>
+    <div class="table-section">
+        <div class="table-title">
+            <span>📋 Table: <strong>categories</strong></span>
+            <span class="badge">8 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>name</th><th>icon</th><th>created_at</th></tr></thead><tbody><tr><td>1</td><td>Bakery</td><td>FaCookieBite</td><td>2026-08-17 16:20:59.233499</td></tr><tr><td>2</td><td>Medical</td><td>FaClinicMedical</td><td>2026-08-17 16:20:59.233513</td></tr><tr><td>3</td><td>Grocery Store</td><td>FaShoppingBasket</td><td>2026-08-17 16:20:59.233516</td></tr><tr><td>4</td><td>Hotel & Restaurant</td><td>FaUtensils</td><td>2026-08-17 16:20:59.233517</td></tr><tr><td>5</td><td>Tea & Cafe</td><td>FaCoffee</td><td>2026-08-17 16:20:59.233519</td></tr><tr><td>6</td><td>Supermarket</td><td>FaStore</td><td>2026-08-17 16:20:59.233520</td></tr><tr><td>7</td><td>Tech & Data Entry</td><td>FaLaptopCode</td><td>2026-08-17 16:20:59.233521</td></tr><tr><td>8</td><td>Tutoring & Education</td><td>FaGraduationCap</td><td>2026-08-17 16:20:59.233522</td></tr>tbody></table></div>
+    <div class="table-section">
+        <div class="table-title">
+            <span>📋 Table: <strong>jobs</strong></span>
+            <span class="badge">1 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>title</th><th>company_name</th><th>location</th><th>job_type</th><th>salary</th><th>category</th><th>image_url</th><th>description</th><th>requirements</th><th>status</th><th>created_at</th></tr></thead><tbody><tr><td>1</td><td>bakery</td><td>quality bakery</td><td>edappadi</td><td>Weekend</td><td>4000</td><td>Bakery</td><td>https://s.tmimgcdn.com/scr/400x250/76700/yamiz-bakery-multipurpose-animated-wordpress-elementor-theme_76771-0-original.jpg</td><td>ghnyuj</td><td>sxdcfvgbh</td><td>Active</td><td>2026-09-10 15:16:00.632734</td></tr>tbody></table></div>
+    <div class="table-section">
+        <div class="table-title">
+            <span>📋 Table: <strong>otps</strong></span>
+            <span class="badge">1 Records</span>
+        </div>
+<table><thead><tr><th>id</th><th>email</th><th>otp_code</th><th>purpose</th><th>attempts</th><th>expires_at</th><th>created_at</th></tr></thead><tbody><tr><td>1</td><td>dineshchinnathambi2007@gmail.com</td><td>476976</td><td>register</td><td>0</td><td>2026-08-18 07:04:05.259371</td><td>2026-08-18 06:59:05.265066</td></tr>tbody></table></div>
+    <div class="table-section">
+        <div class="table-title">
+            <span>📋 Table: <strong>applications</strong></span>
+            <span class="badge">0 Records</span>
+        </div>
+<div class="empty-msg">No records found in this table currently.</div></div>
+    <div class="table-section">
+        <div class="table-title">
+            <span>📋 Table: <strong>saved_jobs</strong></span>
+            <span class="badge">0 Records</span>
+        </div>
+<div class="empty-msg">No records found in this table currently.</div></div>
+</body>
+</html>

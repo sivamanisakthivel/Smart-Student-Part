@@ -1,0 +1,11 @@
+{
+  "name": "smart-student-job-management",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smart Student Part-Time Job Management System",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "vercel-build": "cd frontend && npm install && npm run build",
+    "start": "cd frontend && npm run dev"
+  }
+}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Registered Students - Admin Portal{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-dark mb-1">Registered Student Directory</h2>
+            <p class="text-muted mb-0">View student profiles, contact information, and skillsets</p>
+        </div>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-custom">
+            <i class="fa-solid fa-arrow-left me-1"></i> Dashboard
+        </a>
+    </div>
+
+    <!-- Search Input -->
+    <div class="mb-3">
+        <div class="input-group">
+            <span class="input-group-text bg-white"><i class="fa-solid fa-search text-muted"></i></span>
+            <input type="text" id="tableSearch" class="form-control" placeholder="Search by name, email, department, or skills...">
+        </div>
+    </div>
+
+    <div class="custom-table-card p-4">
+        {% if students %}
+            <div class="table-responsive">
+                <table class="table custom-table table-hover align-middle searchable-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Student Name</th>
+                            <th>Email Address</th>
+                            <th>Phone</th>
+                            <th>College / Dept</th>
+                            <th>Key Skills</th>
+                            <th>Registered Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                            <tr>
+                                <td>#{{ student.id }}</td>
+                                <td>
+                                    <strong class="text-dark">{{ student.full_name }}</strong>
+                                </td>
+                                <td>
+                                    <a href="mailto:{{ student.email }}" class="text-primary text-decoration-none">
+                                        <i class="fa-regular fa-envelope me-1"></i> {{ student.email }}
+                                    </a>
+                                </td>
+                                <td>{{ student.phone }}</td>
+                                <td>
+                                    <strong>{{ student.college }}</strong><br>
+                                    <span class="text-muted fs-7">{{ student.department }}</span>
+                                </td>
+                                <td>
+                                    <span class="d-inline-block text-truncate small text-secondary" style="max-width: 220px;" title="{{ student.skills }}">
+                                        {{ student.skills }}
+                                    </span>
+                                </td>
+                                <td class="text-muted small">
+                                    {{ student.created_at|format_datetime('%b %d, %Y') if student.created_at else 'N/A' }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fa-solid fa-users-slash fs-2 text-muted mb-2"></i>
+                <p class="text-muted mb-0">No registered students found.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

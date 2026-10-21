@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Smart Student Part-Time Job System{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-banner mb-5">
+    <div class="container">
+        <h1 class="hero-title">Smart Student Part-Time Job Management System</h1>
+        <p class="hero-subtitle">Gain real-world experience, build your resume, and earn income while managing your college studies seamlessly.</p>
+
+        <!-- Search Bar -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form action="{{ url_for('job_list') }}" method="GET" class="bg-white p-2 rounded-4 shadow-lg d-md-flex align-items-center gap-2">
+                    <div class="input-group mb-2 mb-md-0 border-0">
+                        <span class="input-group-text bg-transparent border-0 text-primary"><i class="fa-solid fa-magnifying-glass fs-5"></i></span>
+                        <input type="text" name="q" class="form-control border-0 shadow-none ps-0" placeholder="Job title, keywords, or skills...">
+                    </div>
+                    <div class="input-group mb-2 mb-md-0 border-0 border-md-start">
+                        <span class="input-group-text bg-transparent border-0 text-primary"><i class="fa-solid fa-list-check fs-5"></i></span>
+                        <select name="category" class="form-select border-0 shadow-none ps-0">
+                            <option value="">All Categories</option>
+                            <option value="IT & Software">IT & Software</option>
+                            <option value="Administration">Administration</option>
+                            <option value="Education">Education</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Tutoring">Tutoring</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary-custom px-4 py-2 text-nowrap rounded-3">
+                        Find Jobs
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <!-- Platform Features -->
+    <div class="row text-center mb-5 g-4">
+        <div class="col-md-4">
+            <div class="custom-card p-4 text-center">
+                <div class="stat-icon mx-auto mb-3">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+                <h4 class="card-title-blue h5">Student Focused</h4>
+                <p class="text-muted small">Flexible hours tailored to fit your class schedules, exams, and academic workload.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="custom-card p-4 text-center">
+                <div class="stat-icon mx-auto mb-3">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h4 class="card-title-blue h5">Instant Application</h4>
+                <p class="text-muted small">Apply to verified campus openings in a single click with custom cover notes.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="custom-card p-4 text-center">
+                <div class="stat-icon mx-auto mb-3">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h4 class="card-title-blue h5">Verified Campus Jobs</h4>
+                <p class="text-muted small">All job postings are reviewed and managed directly by college administration.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Active Jobs Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="h3 fw-bold text-dark mb-1">Featured Campus Openings</h2>
+            <p class="text-muted mb-0">Explore latest part-time and internship opportunities</p>
+        </div>
+        <a href="{{ url_for('job_list') }}" class="btn btn-outline-custom">View All Jobs <i class="fa-solid fa-arrow-right ms-1"></i></a>
+    </div>
+
+    <div class="row g-4">
+        {% if recent_jobs %}
+            {% for job in recent_jobs %}
+                
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info text-center py-4 rounded-4">
+                    <i class="fa-solid fa-info-circle fs-4 mb-2 d-block"></i>
+                    No job postings available at the moment. Check back soon!
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,334 @@
+{
+    "admins": [
+        {
+            "id": 1,
+            "username": "admin",
+            "email": "admin@jobportal.com",
+            "password": "scrypt:32768:8:1$O26bGFGKuYul7Dz9$856a8d6b9dab4baef6cb00dd92ee1a4c29dbcab3d84e0af7d5b08e6f67fd23336f714ea5aea73a265271bb9de47e0364ac5949ae6589743dc526ea4cd325bdd6",
+            "full_name": "System Administrator",
+            "created_at": "2026-08-17 16:20:59.684066"
+        }
+    ],
+    "students": [
+        {
+            "id": 1,
+            "full_name": "vishnu",
+            "email": "marvel638275@gmail.com",
+            "password": "scrypt:32768:8:1$6kA0jjrfbjHVBlyx$0ee733ea8781571e03b8fc69edddbdd2d96c51dc95878c6d34d4917b5a4645b461ee256ea2d1cfa66d74ea9c5879c34fe7a4109c54cbba3b4ad611ba17db98b4",
+            "phone": "9876543210",
+            "college": "sri vasavi college",
+            "department": "physics",
+            "skills": "react",
+            "created_at": "2026-09-10 15:20:24.605310"
+        },
+        {
+            "id": 2,
+            "full_name": "dinesh",
+            "email": "dineshchinnathambi2007@gmail.com",
+            "password": "scrypt:32768:8:1$0Gu6cARXwMO9fkKG$6f038b08549d1053617446f8d213953a73d5e8ab2ebbc69a32973b14f9a7666328368584ed81cda4c1b475443d88ab4031211a9d15e75a70aec265c34dd5bc1a",
+            "phone": "6382103939",
+            "college": "periyar",
+            "department": "bsc cs",
+            "skills": "sales man",
+            "created_at": "2026-10-01 10:00:40.134410"
+        },
+        {
+            "id": 3,
+            "full_name": "nandha",
+            "email": "mnandha892@gmail.com",
+            "password": "scrypt:32768:8:1$d5kkppoBJrJrAhAG$1ce8064ffd0bf9bf66112e8f0485ba23249f1259dbddc2fd8a4fae684b537c6ba230e31538010e9b3628a8868ee86df58c1885e7dc95198fd09b858f435e40a9",
+            "phone": "9345464482",
+            "college": "sri vasavi college",
+            "department": "bsc cs",
+            "skills": "helper",
+            "created_at": "2026-10-21 14:20:50.443806"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "Bakery",
+            "icon": "FaCookieBite",
+            "created_at": "2026-08-17 16:20:59.233499"
+        },
+        {
+            "id": 2,
+            "name": "Medical",
+            "icon": "FaClinicMedical",
+            "created_at": "2026-08-17 16:20:59.233513"
+        },
+        {
+            "id": 4,
+            "name": "Hotel & Restaurant",
+            "icon": "FaUtensils",
+            "created_at": "2026-08-17 16:20:59.233517"
+        },
+        {
+            "id": 5,
+            "name": "Tea & Cafe",
+            "icon": "FaCoffee",
+            "created_at": "2026-08-17 16:20:59.233519"
+        }
+    ],
+    "jobs": [
+        {
+            "id": 1,
+            "title": "bakery",
+            "company_name": "quality bakery",
+            "location": "edappadi ph:6382759315",
+            "job_type": "Weekend",
+            "salary": "4000",
+            "category": "Bakery",
+            "image_url": "https://s.tmimgcdn.com/scr/400x250/76700/yamiz-bakery-multipurpose-animated-wordpress-elementor-theme_76771-0-original.jpg",
+            "description": "customer",
+            "requirements": "bill counter",
+            "status": "Active",
+            "created_at": "2026-09-10 15:16:00.632734"
+        },
+        {
+            "id": 2,
+            "title": "master",
+            "company_name": "nandha bakery",
+            "location": "Edappadi ph:6369842555",
+            "job_type": "Part-Time",
+            "salary": "5000",
+            "category": "Bakery",
+            "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1790844224/student_jobs/x03n8xwnbx6xrzh74ho5.png",
+            "description": "customer",
+            "requirements": "accounts",
+            "status": "Active",
+            "created_at": "2026-09-30 14:12:14.436383"
+        },
+        {
+            "id": 3,
+            "title": "accounts",
+            "company_name": "kumbakonam degree coffee",
+            "location": "edappadi  ph:",
+            "job_type": "Weekend",
+            "salary": "2500",
+            "category": "Bakery",
+            "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1790845146/student_jobs/u3y4b5j2dorzlvqxx7jf.jpg",
+            "description": "sales assistent",
+            "requirements": "sales man",
+            "status": "Active",
+            "created_at": "2026-10-01 08:58:46.556217"
+        },
+        {
+            "id": 4,
+            "title": "fruit sales",
+            "company_name": "karungali palamuthir solai",
+            "location": "Edappadi  ph:",
+            "job_type": "Part-Time",
+            "salary": "400",
+            "category": "Supermarket",
+            "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1790846420/student_jobs/tjjdaloyemmcmhivzu6f.jpg",
+            "description": "market",
+            "requirements": "fruit sales man",
+            "status": "Active",
+            "created_at": "2026-10-01 09:21:36.050504"
+        },
+        {
+            "id": 5,
+            "title": "flower",
+            "company_name": "saravana flower shop",
+            "location": "Edappadi ph: 96593 54806",
+            "job_type": "Weekend",
+            "salary": "3000",
+            "category": "Supermarket",
+            "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1790846637/student_jobs/ydk2kj6wtnucivydaocp.jpg",
+            "description": "flower",
+            "requirements": "flower sales",
+            "status": "Active",
+            "created_at": "2026-10-01 09:25:11.544249"
+        },
+        {
+            "id": 6,
+            "title": "worker",
+            "company_name": "AMMAN Medical",
+            "location": "edappadi    ph: 98420 86418",
+            "job_type": "Part-Time",
+            "salary": "2500",
+            "category": "Medical",
+            "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1792562488/student_jobs/qhea20xkzz6z4la3paye.jpg",
+            "description": "Medical",
+            "requirements": "Medical  Field",
+            "status": "Active",
+            "created_at": "2026-10-21 06:05:41.750326"
+        },
+        {
+            "id": 7,
+            "title": "Medical",
+            "company_name": "Praveen Medical",
+            "location": "Edappadi   ph:80566 31208",
+            "job_type": "Part-Time",
+            "salary": "3000",
+            "category": "Medical",
+            "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1792562840/student_jobs/vro4ow8vjshfbwhy86xd.jpg",
+            "description": "12th and medical field",
+            "requirements": "degree qualification",
+            "status": "Active",
+            "created_at": "2026-10-21 06:11:08.073396"
+        },
+        {
+            "id": 8,
+            "title": "Medical",
+            "company_name": "Gowtham  Medical",
+            "location": "Edappadi     ph:99432  73392",
+            "job_type": "Weekend",
+            "salary": "4000",
+            "category": "Medical",
+            "image_url": "https://res.cloudinary.com/wdjxsbeh/image/upload/v1792563256/student_jobs/l7hqsmszcgfncbw8brdu.jpg",
+            "description": "Medical",
+            "requirements": "Medical  field  and Lab  field",
+            "status": "Active",
+            "created_at": "2026-10-21 06:17:14.342774"
+        },
+        {
+            "id": 9,
+            "title": "HOTEL",
+            "company_name": "Perumal Hotel",
+            "location": "Edappadi   ph: 99430 41027",
+            "job_type": "Part-Time",
+            "salary": "3500",
+            "category": "Hotel & Restaurant",
+            "image_url": "http://127.0.0.1:5000/static/uploads/1792565621_WhatsApp_Image_2026-10-21_at_12.10.45_PM.jpeg",
+            "description": "college student and 5 and 6 hours in day",
+            "requirements": "Helper",
+            "status": "Active",
+            "created_at": "2026-10-21 06:56:18.152567"
+        },
+        {
+            "id": 10,
+            "title": "Hotel",
+            "company_name": "Sri Saravana  Bavan   Hotel",
+            "location": "Edappadi   ph: 63821 03939",
+            "job_type": "Weekend",
+            "salary": "4000",
+            "category": "Hotel & Restaurant",
+            "image_url": "http://127.0.0.1:5000/static/uploads/1792565963_WhatsApp_Image_2026-10-21_at_12.11.09_PM.jpeg",
+            "description": "weekend",
+            "requirements": "college student",
+            "status": "Active",
+            "created_at": "2026-10-21 07:00:12.033884"
+        },
+        {
+            "id": 11,
+            "title": "Hotel",
+            "company_name": "Sri Krishna  Bavan   Hotel",
+            "location": "Edappadi  ph : 90427  96405",
+            "job_type": "Part-Time",
+            "salary": "450",
+            "category": "Hotel & Restaurant",
+            "image_url": "http://127.0.0.1:5000/static/uploads/1792566228_WhatsApp_Image_2026-10-21_at_12.17.32_PM.jpeg",
+            "description": "4 hours in day",
+            "requirements": "helper",
+            "status": "Active",
+            "created_at": "2026-10-21 07:05:04.031551"
+        },
+        {
+            "id": 12,
+            "title": "Hotel",
+            "company_name": "Edappadi  NattuKozhi Dum Briyani",
+            "location": "Edappadi   ph : 78457 73696",
+            "job_type": "Weekend",
+            "salary": "5000",
+            "category": "Hotel & Restaurant",
+            "image_url": "http://127.0.0.1:5000/static/uploads/1792566544_WhatsApp_Image_2026-10-21_at_12.11.11_PM.jpeg",
+            "description": "5 to 8 hours",
+            "requirements": "helper and food and maintaning  worker",
+            "status": "Active",
+            "created_at": "2026-10-21 07:12:40.172808"
+        },
+        {
+            "id": 13,
+            "title": "Restaurant",
+            "company_name": "Edappadi Dum Briyani",
+            "location": "Edappadi  ph :82484 41819",
+            "job_type": "Part-Time",
+            "salary": "400",
+            "category": "Hotel & Restaurant",
+            "image_url": "http://127.0.0.1:5000/static/uploads/1792567019_WhatsApp_Image_2026-10-21_at_12.11.13_PM.jpeg",
+            "description": "3 hours",
+            "requirements": "helper and maintains",
+            "status": "Active",
+            "created_at": "2026-10-21 07:18:20.821683"
+        }
+    ],
+    "otps": [],
+    "applications": [
+        {
+            "id": 1,
+            "job_id": 2,
+            "student_id": 1,
+            "applied_date": "2026-10-01 09:57:01.606730",
+            "status": "Accepted",
+            "cover_note": ""
+        },
+        {
+            "id": 2,
+            "job_id": 5,
+            "student_id": 2,
+            "applied_date": "2026-10-01 10:00:57.277034",
+            "status": "Accepted",
+            "cover_note": "sales man"
+        },
+        {
+            "id": 3,
+            "job_id": 13,
+            "student_id": 1,
+            "applied_date": "2026-10-21 15:22:17.338975",
+            "status": "Accepted",
+            "cover_note": "Shift: Evening Shift (4:00 PM - 8:00 PM) | Why Suitable: I live 15 mins away and have punctual attendance. | Experience: Cash billing and store maintenance"
+        },
+        {
+            "id": 4,
+            "job_id": 13,
+            "student_id": 3,
+            "applied_date": "2026-10-21 14:58:28.272278",
+            "status": "Accepted",
+            "cover_note": "sdfghj"
+        },
+        {
+            "id": 5,
+            "job_id": 12,
+            "student_id": 3,
+            "applied_date": "2026-10-21 15:01:00.058986",
+            "status": "Accepted",
+            "cover_note": ""
+        },
+        {
+            "id": 6,
+            "job_id": 9,
+            "student_id": 3,
+            "applied_date": "2026-10-21 15:32:28.954310",
+            "status": "Accepted",
+            "cover_note": "Shift: Evening Shift (4:00 PM - 8:00 PM) | Why Suitable: account and helper | Experience: helper"
+        }
+    ],
+    "saved_jobs": [
+        {
+            "id": 1,
+            "student_id": 1,
+            "job_id": 5,
+            "saved_at": "2026-10-06 16:42:40.359533"
+        },
+        {
+            "id": 2,
+            "student_id": 1,
+            "job_id": 4,
+            "saved_at": "2026-10-06 16:42:41.584178"
+        },
+        {
+            "id": 3,
+            "student_id": 1,
+            "job_id": 3,
+            "saved_at": "2026-10-06 16:43:26.391484"
+        },
+        {
+            "id": 4,
+            "student_id": 1,
+            "job_id": 2,
+            "saved_at": "2026-10-06 16:43:30.473497"
+        }
+    ]
+}

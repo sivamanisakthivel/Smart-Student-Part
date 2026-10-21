@@ -153,7 +153,10 @@ def seed_initial_data():
         print(f"[Auto Export Warning] {e}")
 
 
-app, active_db_type = create_app()
+# Direct top-level Flask app instance for Vercel Python runtime
+_created = create_app()
+app = _created[0]
+active_db_type = _created[1]
 
 if hasattr(sys.stdout, 'reconfigure'):
     try:

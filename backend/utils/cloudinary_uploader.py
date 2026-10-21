@@ -71,7 +71,7 @@ def upload_image_file(file_obj, folder="student_jobs"):
         file_obj.seek(0)
         file_obj.save(file_path)
         
-        local_url = f"http://127.0.0.1:5000/static/uploads/{unique_filename}"
+        local_url = f"/static/uploads/{unique_filename}"
         print(f"[Local Upload Fallback] Saved image locally: {local_url}")
         return local_url, None
     except Exception as err:

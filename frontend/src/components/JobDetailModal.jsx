@@ -69,8 +69,9 @@ const JobDetailModal = ({ job, onClose, onApplySubmit, applying = false, already
 
   const getImageUrl = (url, category) => {
     if (!url) return categoryImages[category] || 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80';
-    if (url.startsWith('/static/')) return `http://127.0.0.1:5000${url}`;
-    if (url.startsWith('static/')) return `http://127.0.0.1:5000/${url}`;
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    if (url.startsWith('/static/')) return url;
+    if (url.startsWith('static/')) return `/${url}`;
     return url;
   };
 

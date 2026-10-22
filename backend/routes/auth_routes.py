@@ -1,9 +1,9 @@
 import json
 from flask import Blueprint, request, jsonify
 from datetime import datetime, timedelta
-from backend.models.database import db, Student, Admin, OTPVerification
-from backend.utils.auth import hash_password, verify_password, generate_token, token_required
-from backend.utils.mailer import generate_otp_code, send_otp_email
+from models.database import db, Student, Admin, OTPVerification
+from utils.auth import hash_password, verify_password, generate_token, token_required
+from utils.mailer import generate_otp_code, send_otp_email
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 

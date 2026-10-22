@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime
 from sqlalchemy import or_, desc, asc
-from backend.models.database import db, Job, Application, SavedJob, Category, Student
-from backend.utils.auth import token_required
+from models.database import db, Job, Application, SavedJob, Category, Student
+from utils.auth import token_required
 
 job_bp = Blueprint('jobs', __name__, url_prefix='/api')
 

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from backend.models.database import db, Admin, Student, Job, Application
-from backend.utils.auth import hash_password, verify_password, generate_token, token_required
-from backend.utils.mailer import send_status_update_email
+from models.database import db, Admin, Student, Job, Application
+from utils.auth import hash_password, verify_password, generate_token, token_required
+from utils.mailer import send_status_update_email
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/api/admin')
 
@@ -34,7 +34,7 @@ def admin_login():
 @admin_bp.route('/stats', methods=['GET'])
 @token_required(role_required='admin')
 def get_admin_dashboard_stats():
-    from backend.models.database import Category
+    from models.database import Category
 
     total_jobs = Job.query.count()
     active_jobs = Job.query.filter_by(status='Active').count()
@@ -257,7 +257,7 @@ def update_application_status(app_id):
 @admin_bp.route('/db-report', methods=['GET'])
 def get_db_report_info():
     import os, sqlite3
-    from backend.config import Config
+    from config import Config
     
     db_path = Config.SQLITE_PATH
     exists = os.path.exists(db_path)

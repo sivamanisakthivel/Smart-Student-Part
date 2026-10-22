@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from backend.utils.cloudinary_uploader import upload_image_file
+from utils.cloudinary_uploader import upload_image_file
 
 upload_bp = Blueprint('upload', __name__, url_prefix='/api')
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from backend.models.database import db, Student, Job, Application, SavedJob
-from backend.utils.auth import token_required
+from models.database import db, Student, Job, Application, SavedJob
+from utils.auth import token_required
 
 student_bp = Blueprint('student', __name__, url_prefix='/api/student')
 

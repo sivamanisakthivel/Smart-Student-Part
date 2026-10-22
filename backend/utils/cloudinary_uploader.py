@@ -1,7 +1,7 @@
 import os
 import time
 from werkzeug.utils import secure_filename
-from backend.config import Config
+from config import Config
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'}
 

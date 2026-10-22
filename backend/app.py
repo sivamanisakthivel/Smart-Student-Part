@@ -1,8 +1,10 @@
 import os
 import sys
 
-# Ensure root workspace directory is in python path
+# Support both repository imports locally and the backend service root on Vercel.
+backend_dir = os.path.abspath(os.path.dirname(__file__))
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, backend_dir)
 sys.path.insert(0, root_dir)
 
 # Auto-detect and switch to workspace .venv if system python is used without flask
@@ -17,14 +19,14 @@ except ImportError:
 from flask import Flask, jsonify
 from flask_cors import CORS
 from sqlalchemy import create_engine
-from backend.config import Config
-from backend.models.database import db, Admin, Student, Job, Category, Application, SavedJob, OTPVerification
-from backend.routes.auth_routes import auth_bp
-from backend.routes.job_routes import job_bp
-from backend.routes.student_routes import student_bp
-from backend.routes.admin_routes import admin_bp
-from backend.routes.upload_routes import upload_bp
-from backend.utils.auth import hash_password
+from config import Config
+from models.database import db, Admin, Student, Job, Category, Application, SavedJob, OTPVerification
+from routes.auth_routes import auth_bp
+from routes.job_routes import job_bp
+from routes.student_routes import student_bp
+from routes.admin_routes import admin_bp
+from routes.upload_routes import upload_bp
+from utils.auth import hash_password
 
 def create_app():
     app = Flask(__name__)

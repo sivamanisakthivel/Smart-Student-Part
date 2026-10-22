@@ -67,6 +67,7 @@ class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(150), nullable=False)
     company_name = db.Column(db.String(100), nullable=False)
+    owner_phone = db.Column(db.String(30), nullable=True)
     location = db.Column(db.String(100), nullable=False)
     job_type = db.Column(db.String(50), nullable=False, default='Part-Time')
     salary = db.Column(db.String(50), nullable=False)
@@ -84,6 +85,7 @@ class Job(db.Model):
             'id': self.id,
             'title': self.title,
             'company_name': self.company_name,
+            'owner_phone': self.owner_phone or '',
             'location': self.location,
             'job_type': self.job_type,
             'salary': self.salary,

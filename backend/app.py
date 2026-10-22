@@ -18,7 +18,7 @@ except ImportError:
 
 from flask import Flask, jsonify
 from flask_cors import CORS
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect, text
 from config import Config
 from models.database import db, Admin, Student, Job, Category, Application, SavedJob, OTPVerification
 from routes.auth_routes import auth_bp
@@ -99,6 +99,10 @@ def create_app():
     with app.app_context():
         try:
             db.create_all()
+            job_columns = {column['name'] for column in inspect(db.engine).get_columns('jobs')}
+            if 'owner_phone' not in job_columns:
+                with db.engine.begin() as connection:
+                    connection.execute(text('ALTER TABLE jobs ADD COLUMN owner_phone VARCHAR(30)'))
             seed_initial_data()
         except Exception as err:
             print(f"[DB Setup Warning] {err}")

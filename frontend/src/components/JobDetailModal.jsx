@@ -232,6 +232,17 @@ const JobDetailModal = ({ job, onClose, onApplySubmit, applying = false, already
                   </span>
                 </div>
               </div>
+
+              {job.owner_phone && (
+                <div className="col-sm-6 col-md-3">
+                  <div className="p-3 rounded-3 bg-body-tertiary border border-secondary border-opacity-25 h-100">
+                    <span className="text-muted extra-small d-block mb-1">Owner Contact</span>
+                    <a className="fw-bold small text-body d-flex align-items-center gap-1 text-decoration-none" href={`tel:${job.owner_phone}`}>
+                      <FaPhone className="text-success flex-shrink-0" /> {job.owner_phone}
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Description */}

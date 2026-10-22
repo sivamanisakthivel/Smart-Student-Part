@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS jobs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
     company_name VARCHAR(100) NOT NULL,
+    owner_phone VARCHAR(30) NULL,
     location VARCHAR(100) NOT NULL,
     job_type VARCHAR(50) NOT NULL DEFAULT 'Part-Time', -- Part-Time, Internship, Full-Time, Weekend, Remote
     salary VARCHAR(50) NOT NULL,

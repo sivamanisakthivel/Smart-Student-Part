@@ -136,6 +136,7 @@ def manage_jobs():
     data = request.get_json() or {}
     title = data.get('title', '').strip()
     company_name = data.get('company_name', '').strip()
+    owner_phone = data.get('owner_phone', '').strip()
     location = data.get('location', '').strip()
     job_type = data.get('job_type', 'Part-Time').strip()
     salary = data.get('salary', '').strip()
@@ -150,6 +151,7 @@ def manage_jobs():
     new_job = Job(
         title=title,
         company_name=company_name,
+        owner_phone=owner_phone or None,
         location=location,
         job_type=job_type,
         salary=salary,
@@ -189,6 +191,7 @@ def modify_job(job_id):
     data = request.get_json() or {}
     job.title = data.get('title', job.title).strip()
     job.company_name = data.get('company_name', job.company_name).strip()
+    job.owner_phone = data.get('owner_phone', job.owner_phone or '').strip() or None
     job.location = data.get('location', job.location).strip()
     job.job_type = data.get('job_type', job.job_type).strip()
     job.salary = data.get('salary', job.salary).strip()

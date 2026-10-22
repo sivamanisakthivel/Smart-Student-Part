@@ -10,6 +10,7 @@ import {
   FaBuilding, 
   FaMapMarkerAlt, 
   FaMoneyBillWave,
+  FaPhone,
   FaTag,
   FaCloudUploadAlt
 } from 'react-icons/fa';
@@ -26,6 +27,7 @@ const AdminJobs = ({ addToast }) => {
   const [formData, setFormData] = useState({
     title: '',
     company_name: '',
+    owner_phone: '',
     location: '',
     job_type: 'Part-Time',
     salary: '',
@@ -57,6 +59,7 @@ const AdminJobs = ({ addToast }) => {
       setFormData({
         title: job.title,
         company_name: job.company_name,
+        owner_phone: job.owner_phone || '',
         location: job.location,
         job_type: job.job_type,
         salary: job.salary,
@@ -71,6 +74,7 @@ const AdminJobs = ({ addToast }) => {
       setFormData({
         title: '',
         company_name: '',
+        owner_phone: '',
         location: '',
         job_type: 'Part-Time',
         salary: '',
@@ -292,6 +296,18 @@ const AdminJobs = ({ addToast }) => {
                   </div>
 
                   <div className="row g-3 mb-3">
+                    <div className="col-md-6">
+                      <label className="form-label small fw-semibold text-body">Job Owner Contact Number</label>
+                      <input
+                        type="tel"
+                        className="form-input-custom"
+                        placeholder="e.g. +91 98765 43210"
+                        value={formData.owner_phone}
+                        onChange={(e) => setFormData({ ...formData, owner_phone: e.target.value })}
+                        maxLength={30}
+                      />
+                    </div>
+
                     <div className="col-md-6">
                       <label className="form-label small fw-semibold text-body">Location *</label>
                       <input 

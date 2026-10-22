@@ -16,6 +16,7 @@ except ImportError:
 
 from flask import Flask, jsonify
 from flask_cors import CORS
+from sqlalchemy import create_engine
 from backend.config import Config
 from backend.models.database import db, Admin, Student, Job, Category, Application, SavedJob, OTPVerification
 from backend.routes.auth_routes import auth_bp
@@ -32,27 +33,38 @@ def create_app():
     # Enable CORS for React frontend (Vite default localhost:5173 / localhost:3000)
     CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-    # Determine database connection (MySQL with SQLite fallback)
+    # Validate the configured MySQL connection before initializing the ORM.
     db_uri = Config.MYSQL_URI
+    engine_options = Config.SQLALCHEMY_ENGINE_OPTIONS
     db_type = 'MySQL'
 
     try:
-        import pymysql
-        conn = pymysql.connect(
-            host=Config.MYSQL_HOST,
-            user=Config.MYSQL_USER,
-            password=Config.MYSQL_PASSWORD,
-            database=Config.MYSQL_DB,
-            port=int(Config.MYSQL_PORT),
-            connect_timeout=2
-        )
-        conn.close()
-    except Exception as mysql_err:
-        # Fall back to SQLite for seamless local VS Code testing
+        connect_args = {
+            'connect_timeout': 5,
+            **engine_options.get('connect_args', {}),
+        }
+        engine_options = {
+            key: value for key, value in engine_options.items()
+            if key != 'connect_args'
+        }
+        engine = create_engine(db_uri, connect_args=connect_args, **engine_options)
+        with engine.connect():
+            pass
+        engine.dispose()
+    except Exception as db_error:
+        if Config.DATABASE_URL or os.getenv('VERCEL') == '1':
+            raise RuntimeError(
+                'Could not connect to the configured production database. '
+                'Check DATABASE_URL and its TLS settings.'
+            ) from db_error
+
+        # Fall back to SQLite only for local development.
         db_uri = Config.SQLITE_URI
+        engine_options = {}
         db_type = 'SQLite (VS Code Fallback)'
 
     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = engine_options
     db.init_app(app)
 
     # Register API Blueprints

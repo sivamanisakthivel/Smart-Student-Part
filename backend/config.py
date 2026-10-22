@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from sqlalchemy.engine import URL, make_url
 
 # Load .env file
 load_dotenv()
@@ -11,15 +12,37 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'smart_student_job_system_secret_key_2026')
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'smart_student_job_jwt_secret_key_2026')
     
+    DATABASE_URL = os.getenv('DATABASE_URL')
     MYSQL_HOST = os.getenv('MYSQL_HOST', 'localhost')
-    MYSQL_PORT = os.getenv('MYSQL_PORT', '3306')
+    MYSQL_PORT = int(os.getenv('MYSQL_PORT', '3306'))
     MYSQL_USER = os.getenv('MYSQL_USER', 'root')
     MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD', '')
     MYSQL_DB = os.getenv('MYSQL_DB', 'student_job_db')
 
-    # Construct SQLAlchemy Database URIs (supports DATABASE_URL / MySQL / SQLite fallback)
-    DATABASE_URL = os.getenv('DATABASE_URL')
-    MYSQL_URI = DATABASE_URL if DATABASE_URL else f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
+    if DATABASE_URL:
+        MYSQL_URI = make_url(DATABASE_URL)
+        if MYSQL_URI.drivername in ('mysql', 'mysql+pymysql'):
+            MYSQL_URI = MYSQL_URI.set(drivername='mysql+pymysql')
+
+        query = dict(MYSQL_URI.query)
+        ssl_mode = query.pop('ssl-mode', '').upper()
+        if ssl_mode and ssl_mode != 'REQUIRED':
+            raise ValueError('DATABASE_URL supports ssl-mode=REQUIRED only')
+        MYSQL_URI = MYSQL_URI.set(query=query)
+        SQLALCHEMY_ENGINE_OPTIONS = (
+            {'connect_args': {'ssl': {'verify_mode': 'none'}}}
+            if ssl_mode == 'REQUIRED' else {}
+        )
+    else:
+        MYSQL_URI = URL.create(
+            'mysql+pymysql',
+            username=MYSQL_USER,
+            password=MYSQL_PASSWORD,
+            host=MYSQL_HOST,
+            port=MYSQL_PORT,
+            database=MYSQL_DB,
+        )
+        SQLALCHEMY_ENGINE_OPTIONS = {}
     
     # On Vercel serverless functions, /tmp is the writable storage directory
     if os.getenv('VERCEL') == '1':

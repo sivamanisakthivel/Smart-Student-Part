@@ -122,17 +122,15 @@ mysql -u root -p < database/database.sql
 
 ## ☁️ Deploying on Vercel
 
-This repository is pre-configured with **zero-config Vercel hosting**:
-- `vercel.json` and `frontend/vercel.json` route all frontend pages cleanly.
-- `api/index.py` handles backend serverless requests.
-- Single Page Application (SPA) routing fallback prevents 404 errors on browser page reloads.
+This repository uses Vercel Services to deploy the React frontend and Flask API together.
+The Vercel project **Root Directory must be the repository root**, not `frontend`:
+- `/api/*` and `/static/*` requests are routed to the Flask backend.
+- Other requests are routed to the React frontend.
 
 ### Steps to Deploy:
 1. Go to [Vercel Dashboard](https://vercel.com/dashboard) and click **"Add New Project"**.
 2. Select your GitHub repository: **`sivamanisakthivel/Smart-Student-Part`**.
-3. Vercel will automatically detect `vercel.json` configuration!
-4. *(Optional)* In **Environment Variables**, add:
-   - `VITE_API_BASE_URL` (if backend API is hosted on a dedicated server)
-   - `SECRET_KEY` and `JWT_SECRET_KEY`
-   - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`
-5. Click **"Deploy"** — your project is live in ~60 seconds!
+3. Set **Root Directory** to the repository root (`./`), not `frontend`.
+4. In **Environment Variables**, add `DATABASE_URL` using the connection URL from your MySQL provider, plus `SECRET_KEY` and `JWT_SECRET_KEY`. For Aiven URLs with `ssl-mode=REQUIRED`, the backend enables a TLS connection.
+5. Add any required `SMTP_*` and `CLOUDINARY_*` variables for email and image uploads.
+6. Deploy, then check `/api/health` and confirm the response reports `MySQL` before using the login page.

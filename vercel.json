@@ -5,9 +5,9 @@
       "root": "frontend/"
     },
     "backend": {
-      "root": "./",
+      "root": "backend/",
       "framework": "flask",
-      "entrypoint": "backend.app:app"
+      "entrypoint": "app:app"
     }
   },
   "rewrites": [
